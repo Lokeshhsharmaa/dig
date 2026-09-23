@@ -208,7 +208,7 @@ nav a:hover {
   font-weight: bold;
 }
 
-/* --- Mobile Navigation Drawer --- */
+/* --- Mobile Navigation Drawer (Cleaned Alignment) --- */
 .mobile-nav {
   position: fixed;
   inset: 0;
@@ -218,27 +218,34 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 32px;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 20px;
+  padding: 40px 20px;
 }
 .mobile-nav.active {
   transform: translateY(0);
 }
 .mobile-nav a {
   font-family: 'Syne', sans-serif;
-  font-size: 32px;
-  margin-bottom: 24px;
-  color: #111;
+  font-size: clamp(26px, 6.5vw, 36px);
+  color: #111111;
   text-decoration: none;
   font-weight: 800;
+  white-space: nowrap;
+  letter-spacing: -0.5px;
+  transition: color 0.2s ease;
+}
+.mobile-nav a:hover {
+  color: #FF2020;
 }
 .close-btn {
   position: absolute;
   top: 25px;
   right: 25px;
-  font-size: 40px;
+  font-size: 38px;
   cursor: pointer;
+  line-height: 1;
 }
 
 /* --- Hero Section --- */
@@ -292,18 +299,24 @@ nav a:hover {
   color: #bbbbbb;
   max-width: 650px;
 }
+
+/* --- Buttons --- */
 .btn-pill {
   background-color: #111111;
   color: #ffffff;
-  padding: 15px 34px;
+  padding: 14px 30px;
   border: none;
   border-radius: 50px;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
+  width: auto;
+  max-width: fit-content;
   transition: transform 0.2s, background-color 0.2s;
 }
 .btn-pill:hover {
@@ -318,7 +331,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee --- */
+/* --- Brand Marquee (Card & Logo Alignment Fix) --- */
 .brand-bar {
   width: 100%;
   margin: 0 auto clamp(50px, 6vw, 80px);
@@ -363,7 +376,7 @@ nav a:hover {
   flex-shrink: 0;
   align-items: center;
   justify-content: space-around;
-  gap: 28px;
+  gap: 20px;
   animation: scrollMarquee 26s linear infinite;
   min-width: 100%;
 }
@@ -374,12 +387,13 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
-  min-width: 140px;
-  padding: 10px 22px;
+  height: 64px;
+  width: 145px;
+  flex-shrink: 0;
+  padding: 10px 18px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -389,10 +403,12 @@ nav a:hover {
 }
 .brand-card-item img {
   max-height: 32px;
-  max-width: 110px;
+  max-width: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 @keyframes scrollMarquee {
@@ -655,10 +671,15 @@ nav a:hover {
   line-height: 1.8;
   margin-top: 25px;
 }
-.footer-info a {
-  color: #111;
+.contact-link {
+  color: #111111;
   text-decoration: none;
   font-weight: 700;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+.contact-link:hover {
+  color: #FF2020;
 }
 
 /* --- Scroll Reveal Animations --- */
@@ -704,14 +725,24 @@ nav a:hover {
   }
   .hero-content {
     grid-template-columns: 1fr;
+    justify-items: start;
   }
   .hero-symbol {
     display: none;
+  }
+  .btn-pill {
+    padding: 12px 24px;
+    font-size: 14px;
   }
 }
 @media (max-width: 520px) {
   .metric-row-single {
     grid-template-columns: 1fr;
+  }
+  .brand-card-item {
+    width: 125px;
+    height: 56px;
+    padding: 8px 12px;
   }
 }
 </style>
@@ -906,11 +937,11 @@ nav a:hover {
         <h2 class="section-title-wix">Let's Work Together</h2>
         <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
         <div class="footer-info">
-          <p style="color: #666;">Phone / WhatsApp</p>
-          <a href="tel:+917904606332">+91 79046 06332</a>
+          <p style="color: #666; margin-bottom: 2px;">Phone / WhatsApp</p>
+          <a href="tel:+917904606332" class="contact-link">+91 79046 06332</a>
           <br><br>
-          <p style="color: #666;">Direct Email</p>
-          <a href="mailto:hellohandles@gmail.com">hellohandles@gmail.com</a>
+          <p style="color: #666; margin-bottom: 2px;">Email</p>
+          <a href="mailto:hellohandles@gmail.com" class="contact-link">hellohandles@gmail.com</a>
         </div>
       </div>
       <div>
@@ -927,7 +958,7 @@ nav a:hover {
           <div class="form-group">
             <textarea placeholder="Tell us about your project (Reels, TVC, Corporate, etc.)" rows="4"></textarea>
           </div>
-          <button type="submit" class="btn-pill" style="border:none; cursor:pointer;">Submit Brief</button>
+          <button type="submit" class="btn-pill" style="border:none; cursor:pointer;">Submit</button>
         </form>
       </div>
     </div>
