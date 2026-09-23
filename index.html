@@ -31,7 +31,7 @@ body {
 }
 
 /* ========================================================
-   CUSTOM VIDEO-AGENCY RETICLE CURSOR
+   EXACT RETICLE CURSOR FROM SCREENSHOT (SPINS ON MOVE & SCROLL)
    ======================================================== */
 @media (hover: hover) and (pointer: fine) {
   body {
@@ -46,39 +46,34 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background-color: #FF2020;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  transform: translate3d(-50%, -50%, 0);
   opacity: 0;
   will-change: transform, opacity;
+  transform: translate3d(-50%, -50%, 0);
   transition: opacity 0.25s ease;
+  box-shadow: 0 0 6px rgba(255, 32, 32, 0.6);
 }
 
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(255, 32, 32, 0.7);
+  width: 44px;
+  height: 44px;
+  border: 1.5px dotted #FF2020; /* Dotted red circle matching your photo */
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
-  transform: translate3d(-50%, -50%, 0);
   opacity: 0;
-  will-change: transform, width, height, opacity, border-color;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s ease,
-              border-color 0.25s ease,
-              background-color 0.25s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  will-change: transform, opacity;
+  transform: translate3d(-50%, -50%, 0);
+  box-shadow: 0 0 16px rgba(255, 32, 32, 0.28); /* Ambient soft red glow */
+  transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease;
 }
 
 .cursor-dot.is-active,
@@ -86,38 +81,26 @@ body {
   opacity: 1;
 }
 
-/* Viewfinder Shutter rotation on scroll */
-.cursor-ring.is-scrolling {
-  width: 48px;
-  height: 48px;
-  border-color: #FF2020;
-  border-style: dashed;
-  animation: rotateReticle 3.5s linear infinite;
-  box-shadow: 0 0 16px rgba(255, 32, 32, 0.35);
+/* Continuously spins around when moving or scrolling */
+.cursor-ring.is-spinning {
+  animation: spinRound 1.8s linear infinite;
 }
 
-.cursor-dot.is-scrolling {
-  transform: translate3d(-50%, -50%, 0) scale(1.4);
-  box-shadow: 0 0 8px #FF2020;
+/* Pressed / Hover state */
+.cursor-ring.is-pressed,
+.cursor-ring.is-hovering {
+  width: 52px;
+  height: 52px;
+  box-shadow: 0 0 22px rgba(255, 32, 32, 0.4);
 }
 
-/* Touch Down / Desktop Hover State */
-.cursor-ring.is-hovering,
-.cursor-ring.is-pressed {
-  width: 54px;
-  height: 54px;
-  background-color: rgba(255, 32, 32, 0.12);
-  border-color: #FF2020;
-  border-style: solid;
-}
-
-.cursor-dot.is-pressed {
-  transform: translate3d(-50%, -50%, 0) scale(1.5);
-}
-
-@keyframes rotateReticle {
-  from { transform: translate3d(-50%, -50%, 0) rotate(0deg); }
-  to { transform: translate3d(-50%, -50%, 0) rotate(360deg); }
+@keyframes spinRound {
+  from {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
 }
 
 /* --- Language Selector Bar --- */
@@ -1028,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Smooth Universal Reticle Cursor (Fluid Mobile/Tablet Touch Tracking) -->
+<!-- Precise Dotted Reticle Tracking Script (Smooth Touch & Continuous Spin on Move) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const dot = document.getElementById("cursorDot");
@@ -1038,13 +1021,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let targetX = window.innerWidth / 2;
   let targetY = window.innerHeight / 2;
-  let dotX = targetX;
-  let dotY = targetY;
-  let ringX = targetX;
-  let ringY = targetY;
+  let currentX = targetX;
+  let currentY = targetY;
 
   let isVisible = false;
-  let scrollTimeout = null;
+  let spinTimeout = null;
   let touchFadeTimeout = null;
   let isTouching = false;
 
@@ -1060,25 +1041,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isVisible) {
       dot.classList.remove("is-active");
       ring.classList.remove("is-active");
-      ring.classList.remove("is-scrolling");
+      ring.classList.remove("is-spinning");
       ring.classList.remove("is-pressed");
-      dot.classList.remove("is-pressed");
       isVisible = false;
     }
   }
 
-  // Mouse move on Mac / PC
+  function startSpin() {
+    ring.classList.add("is-spinning");
+    clearTimeout(spinTimeout);
+    spinTimeout = setTimeout(() => {
+      ring.classList.remove("is-spinning");
+    }, 280);
+  }
+
+  // Mouse tracking (Mac/Laptop)
   window.addEventListener("mousemove", (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
     showCursor();
+    startSpin();
   }, { passive: true });
 
   window.addEventListener("mouseleave", () => {
     hideCursor();
   });
 
-  // Touch Tracking for Phone, iPad, & Tablets
+  // Touch tracking (Phone, iPad, Tablets)
   function handleTouch(e) {
     if (e.touches && e.touches.length > 0) {
       targetX = e.touches[0].clientX;
@@ -1086,8 +1075,8 @@ document.addEventListener("DOMContentLoaded", () => {
       isTouching = true;
 
       showCursor();
+      startSpin();
       ring.classList.add("is-pressed");
-      dot.classList.add("is-pressed");
 
       clearTimeout(touchFadeTimeout);
     }
@@ -1099,12 +1088,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("touchend", () => {
     isTouching = false;
     ring.classList.remove("is-pressed");
-    dot.classList.remove("is-pressed");
 
     clearTimeout(touchFadeTimeout);
     touchFadeTimeout = setTimeout(() => {
       hideCursor();
-    }, 900);
+    }, 1100);
   }, { passive: true });
 
   window.addEventListener("touchcancel", () => {
@@ -1112,42 +1100,31 @@ document.addEventListener("DOMContentLoaded", () => {
     hideCursor();
   });
 
-  // Continuous 60fps / 120fps Smooth Physics Follow Loop
-  function animate() {
+  // Smooth easing loop: glides seamlessly across mouse and touch
+  function renderLoop() {
     if (isVisible) {
-      // Dot moves swiftly to current point (touch or mouse)
-      dotX += (targetX - dotX) * 0.35;
-      dotY += (targetY - dotY) * 0.35;
-      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
 
-      // Ring glides smoothly behind with soft easing
-      ringX += (targetX - ringX) * 0.18;
-      ringY += (targetY - ringY) * 0.18;
-      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      dot.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
+      ring.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(renderLoop);
   }
-  requestAnimationFrame(animate);
+  requestAnimationFrame(renderLoop);
 
-  // Scroll Viewfinder Trigger
+  // Scroll reaction: keeps rotating while scrolling the screen
   window.addEventListener("scroll", () => {
     showCursor();
-    ring.classList.add("is-scrolling");
-    dot.classList.add("is-scrolling");
+    startSpin();
 
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      ring.classList.remove("is-scrolling");
-      dot.classList.remove("is-scrolling");
-
-      if (!isTouching && window.matchMedia("(hover: none)").matches) {
-        clearTimeout(touchFadeTimeout);
-        touchFadeTimeout = setTimeout(hideCursor, 500);
-      }
-    }, 180);
+    if (!isTouching && window.matchMedia("(hover: none)").matches) {
+      clearTimeout(touchFadeTimeout);
+      touchFadeTimeout = setTimeout(hideCursor, 600);
+    }
   }, { passive: true });
 
-  // Hover effect on desktop
+  // Hover effect on clickable elements
   const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
   targets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
