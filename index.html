@@ -1,384 +1,1068 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Marketing Agency</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<title>Handles | Video Production Agency</title>
+
+<!-- Fonts matching Wix template -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
 }
 body {
-background-color: #ffffcc; /* Light yellow background */
-color: #111111;
-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-overflow-x: hidden;
-scroll-behavior: smooth;
+  background-color: #ffffcc;
+  color: #111111;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+  top: 0px !important;
 }
-/* --- Header --- */
+
+/* ========================================================
+   CUSTOM VIDEO-AGENCY CURSOR (DESKTOP, TAB & PHONE)
+   ======================================================== */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, input, textarea, select {
+    cursor: none !important;
+  }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #FF2020;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.15s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 32, 32, 0.65);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease,
+              transform 0.1s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-dot.is-active,
+.cursor-ring.is-active {
+  opacity: 1;
+}
+
+.cursor-ring.is-scrolling {
+  width: 50px;
+  height: 50px;
+  border-color: #FF2020;
+  border-style: dashed;
+  animation: rotateReticle 3.5s linear infinite;
+  box-shadow: 0 0 16px rgba(255, 32, 32, 0.35);
+}
+
+.cursor-dot.is-scrolling {
+  transform: translate(-50%, -50%) scale(1.5);
+  background-color: #FF2020;
+  box-shadow: 0 0 8px #FF2020;
+}
+
+.cursor-ring.is-hovering {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 32, 32, 0.12);
+  border-color: #FF2020;
+  border-style: solid;
+}
+
+@keyframes rotateReticle {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* --- Language Selector Bar --- */
+.lang-bar {
+  background: #111111;
+  padding: 8px 4vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #ffffff;
+  min-height: 42px;
+}
+.lang-bar span {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+#google_translate_element select {
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-gadget-icon,
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  color: transparent !important;
+  font-size: 0 !important;
+}
+.goog-te-gadget .goog-te-combo {
+  margin: 0 !important;
+}
+
+/* --- Header & Brand Logo --- */
 header {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-padding: 30px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-z-index: 1000;
-background-color: #ffffcc;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: #ffffcc;
 }
-.logo {
-display: flex;
-align-items: center;
-gap: 10px;
-font-weight: 700;
-font-size: 20px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
-.logo-symbol {
-display: flex;
-gap: 3px;
+.logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
-.symbol-dot {
-width: 8px;
-height: 8px;
-background-color: #111;
-border-radius: 50%;
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: 1.65rem;
+  letter-spacing: -0.5px;
+  color: #FF2020;
+  text-transform: uppercase;
+  line-height: 1;
+}
+nav {
+  display: flex;
+  align-items: center;
 }
 nav a {
-color: #111111;
-text-decoration: none;
-margin-left: 30px;
-font-size: 16px;
-font-weight: 400;
+  color: #111111;
+  text-decoration: none;
+  margin-left: clamp(20px, 3vw, 40px);
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+nav a:hover {
+  opacity: 0.6;
 }
 .menu-btn {
-display: none;
-font-size: 24px;
-cursor: pointer;
-font-weight: bold;
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  font-weight: bold;
 }
-/* --- Mobile Overlay --- */
+
+/* --- Mobile Navigation Drawer --- */
 .mobile-nav {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: #ffffcc;
-z-index: 2000;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-transform: translateY(-100%);
-transition: transform 0.5s ease;
+  position: fixed;
+  inset: 0;
+  background-color: #ffffcc;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 20px;
 }
 .mobile-nav.active {
-transform: translateY(0);
+  transform: translateY(0);
 }
 .mobile-nav a {
-font-size: 40px;
-margin-bottom: 30px;
-color: #111;
-text-decoration: none;
-font-weight: bold;
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #111;
+  text-decoration: none;
+  font-weight: 800;
 }
 .close-btn {
-position: absolute;
-top: 30px;
-right: 30px;
-font-size: 40px;
-cursor: pointer;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 40px;
+  cursor: pointer;
 }
+
 /* --- Hero Section --- */
 .hero {
-background-color: #111111;
-color: #ffffff;
-padding: 200px 30px 100px 30px;
-border-radius: 0 0 40px 40px;
-margin-bottom: 100px;
+  background-color: #111111;
+  color: #ffffff;
+  padding: clamp(70px, 10vw, 130px) 5vw clamp(60px, 8vw, 100px);
+  border-radius: 0 0 clamp(30px, 4vw, 50px) clamp(30px, 4vw, 50px);
+  margin-bottom: clamp(50px, 6vw, 80px);
+}
+.hero-tagline {
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #FF2020;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 .hero-title {
-font-size: 120px;
-font-weight: 900;
-line-height: 0.9;
-margin-bottom: 30px;
-text-transform: uppercase;
-background: linear-gradient(45deg, #ff5722, #4caf50, #2196f3);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 35px;
+  text-transform: capitalize;
+  background: linear-gradient(45deg, #FF2020, #ff8800, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero-content {
-display: grid;
-grid-template-columns: 1fr 2fr 1fr;
-align-items: center;
-gap: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
 }
 .hero-symbol {
-width: 60px;
-height: 60px;
-background-color: #ffffff;
-border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #111;
 }
 .hero-text {
-font-size: 18px;
-color: #cccccc;
-max-width: 500px;
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.6;
+  color: #bbbbbb;
+  max-width: 650px;
 }
-.btn-black {
-background-color: #ffffff;
-color: #111111;
-padding: 15px 30px;
-border: none;
-border-radius: 30px;
-font-size: 16px;
-font-weight: bold;
-cursor: pointer;
-width: fit-content;
+.btn-pill {
+  background-color: #111111;
+  color: #ffffff;
+  padding: 15px 34px;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.2s;
 }
-/* --- About Section --- */
-.about {
-padding: 100px 30px;
-max-width: 1400px;
-margin: 0 auto;
+.btn-pill:hover {
+  transform: translateY(-2px);
+  background-color: #333333;
 }
-.section-title {
-font-size: 80px;
-font-weight: bold;
-margin-bottom: 50px;
-text-transform: uppercase;
+.btn-hero {
+  background-color: #ffffff;
+  color: #111111;
 }
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 100px;
-align-items: start;
+.btn-hero:hover {
+  background-color: #f0f0f0;
 }
-.about-text p {
-font-size: 24px;
-line-height: 1.5;
-margin-bottom: 30px;
+
+/* --- Brand Marquee --- */
+.brand-bar {
+  width: 100%;
+  margin: 0 auto clamp(50px, 6vw, 80px);
+  overflow: hidden;
+  text-align: center;
 }
-.about-image {
-width: 100%;
-height: 400px;
-background-color: #cccccc;
-border-radius: 20px;
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111111;
+  color: #ffffff;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 800;
+  margin-bottom: 35px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-/* --- Client Reviews --- */
-.reviews {
-padding: 100px 30px;
-max-width: 1400px;
-margin: 0 auto;
+.brand-badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #FF2020;
+  border-radius: 50%;
+  display: inline-block;
 }
-.review-card {
-border-top: 1px solid #111111;
-padding: 30px 0;
-display: grid;
-grid-template-columns: 1fr 2fr;
-gap: 50px;
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  padding: 10px 0;
 }
-.client-name {
-font-size: 20px;
-font-weight: bold;
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-around;
+  gap: 28px;
+  animation: scrollMarquee 26s linear infinite;
+  min-width: 100%;
 }
-.review-text {
-font-size: 28px;
-line-height: 1.4;
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
 }
-/* --- Approach --- */
-.approach {
-padding: 100px 30px;
-max-width: 1400px;
-margin: 0 auto;
+.brand-card-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  min-width: 140px;
+  padding: 10px 22px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.approach-card {
-background-color: #ffffff;
-padding: 50px;
-border-radius: 40px;
-margin-bottom: 30px;
-display: grid;
-grid-template-columns: 1fr 2fr 1fr;
-align-items: center;
+.brand-card-item:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
-.approach-num {
-font-size: 80px;
-font-weight: bold;
+.brand-card-item img {
+  max-height: 32px;
+  max-width: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
-.approach-text h3 {
-font-size: 30px;
-margin-bottom: 15px;
+
+@keyframes scrollMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
-.approach-text p {
-font-size: 16px;
-color: #666;
+
+/* --- Content Wrapper --- */
+.section-wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(45px, 6vw, 85px) 4vw;
 }
-/* --- Contact --- */
-.contact {
-padding: 100px 30px;
-max-width: 1400px;
-margin: 0 auto;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 100px;
+
+.section-title-wix {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  color: #111111;
+  word-break: normal;
+}
+.section-subtitle-wix {
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: clamp(35px, 5vw, 55px);
+}
+
+/* --- WHAT WE DO (Split Layout) --- */
+.wix-split-section {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: clamp(40px, 6vw, 90px);
+  align-items: start;
+}
+.wix-split-left {
+  position: sticky;
+  top: 110px;
+}
+.wix-decorative-dots {
+  display: grid;
+  grid-template-columns: repeat(2, 9px);
+  gap: 5px;
+  margin-top: 30px;
+}
+.wix-decorative-dots span {
+  width: 9px;
+  height: 9px;
+  background-color: #FF2020;
+  border-radius: 50%;
+}
+.wix-split-right p.lead {
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.55;
+  color: #111111;
+  margin-bottom: 35px;
+  font-weight: 500;
+}
+.wix-service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 35px;
+}
+.wix-service-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 18px;
+}
+.wix-service-item h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.wix-service-item p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* --- OUR APPROACH (Capsule Cards) --- */
+.wix-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.wix-capsule-card {
+  background-color: #ffffcc;
+  border-radius: 30px;
+  padding: clamp(28px, 4vw, 42px) clamp(25px, 4vw, 50px);
+  display: grid;
+  grid-template-columns: 220px 1fr 40px;
+  align-items: center;
+  gap: 30px;
+  border: 1.5px solid rgba(17, 17, 17, 0.09);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.wix-capsule-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #FF2020;
+  opacity: 0;
+  transform: scaleY(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.wix-capsule-card:hover {
+  transform: translateX(8px);
+  border-color: rgba(255, 32, 32, 0.35);
+  box-shadow: -4px 10px 30px rgba(255, 32, 32, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.wix-capsule-card:hover::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.wix-capsule-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #111111;
+  transition: color 0.3s ease;
+}
+
+.wix-capsule-card:hover .wix-capsule-title {
+  color: #FF2020;
+}
+
+.wix-capsule-desc {
+  font-size: 15px;
+  color: #444444;
+  line-height: 1.6;
+}
+.wix-capsule-dots {
+  display: grid;
+  grid-template-columns: repeat(2, 6px);
+  gap: 4px;
+  justify-content: flex-end;
+}
+.wix-capsule-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #FF2020;
+  border-radius: 50%;
+  opacity: 0.35;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.wix-capsule-card:hover .wix-capsule-dots span {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* --- WIDE METRICS SECTION (4 STATS IN ONE LINE) --- */
+.metrics-wrapper-wide {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(30px, 4vw, 60px) 3vw;
+}
+.metrics {
+  background-color: #111111;
+  color: #ffffff;
+  border-radius: clamp(24px, 3vw, 40px);
+  padding: clamp(40px, 5vw, 65px) clamp(30px, 4vw, 60px);
+  width: 100%;
+}
+.metrics .section-title-wix {
+  color: #ffffff;
+}
+.metrics-subtitle {
+  color: #aaaaaa;
+  max-width: 700px;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 8px;
+  margin-bottom: 35px;
+}
+.metric-row-single {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+}
+.metric-box-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.metric-box-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 32, 32, 0.4);
+}
+.metric-box-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+  font-weight: 900;
+  color: #FF2020;
+  margin-bottom: 6px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+.metric-box-card p {
+  font-size: clamp(10px, 0.85vw, 12px);
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- CONTACT SECTION --- */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 90px);
+  align-items: start;
 }
 .form-group {
-margin-bottom: 30px;
+  margin-bottom: 22px;
 }
-.form-group input, .form-group textarea {
-width: 100%;
-background: transparent;
-border: none;
-border-bottom: 1px solid #111111;
-padding: 15px 0;
-font-size: 16px;
-font-family: inherit;
+.form-group input, 
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid #111111;
+  padding: 12px 0;
+  font-size: 15px;
+  font-family: inherit;
+  border-radius: 0;
 }
-.form-group input:focus, .form-group textarea:focus {
-outline: none;
-border-color: #ff5722;
-}
-.btn-submit {
-background-color: #111111;
-color: #ffffff;
-padding: 20px 40px;
-border: none;
-border-radius: 30px;
-font-size: 16px;
-font-weight: bold;
-cursor: pointer;
-text-transform: uppercase;
+.form-group input:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: #FF2020;
 }
 .footer-info {
-font-size: 18px;
-line-height: 1.6;
-margin-bottom: 50px;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 25px;
 }
 .footer-info a {
-color: #111;
-display: block;
-margin-bottom: 10px;
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
 }
-/* --- Responsive --- */
-@media (max-width: 768px) {
-nav { display: none; }
-.menu-btn { display: block; }
-.hero-title { font-size: 60px; }
-.hero-content, .about-grid, .contact, .approach-card { grid-template-columns: 1fr; gap: 50px; }
-.review-card { grid-template-columns: 1fr; gap: 20px; }
+
+/* --- Scroll Reveal Animations --- */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsive Queries --- */
+@media (max-width: 950px) {
+  .metric-row-single {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+@media (max-width: 860px) {
+  nav { display: none; }
+  .menu-btn { display: block; }
+  .wix-split-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .wix-split-left {
+    position: static;
+  }
+  .wix-capsule-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .wix-capsule-dots {
+    display: none;
+  }
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+  .hero-symbol {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .metric-row-single {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
 <body>
+
+<!-- Custom Video Reticle Cursor Elements -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Language Switcher Bar -->
+<div class="lang-bar">
+  <span>Select Language / اختر اللغة:</span>
+  <div id="google_translate_element"></div>
+</div>
+
 <header>
-<div class="logo">
-<div class="logo-symbol">
-<div class="symbol-dot"></div>
-<div class="symbol-dot"></div>
-<div class="symbol-dot"></div>
-<div class="symbol-dot"></div>
-</div>
-K. O'Reilly
-</div>
-<nav>
-<a href="#about">About</a>
-<a href="#reviews">Reviews</a>
-<a href="#approach">Approach</a>
-<a href="#contact">Contact Us</a>
-</nav>
-<div class="menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('active')">+</div>
+  <a href="#" class="logo-container">
+    <img src="images/handles-logo.png" alt="Handles Logo" class="logo-img">
+    <span class="logo-text">Handles</span>
+  </a>
+
+  <nav>
+    <a href="#what-we-do">What We Do</a>
+    <a href="#approach">Our Approach</a>
+    <a href="#track-record">Results</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('active')">☰</div>
 </header>
+
 <div class="mobile-nav">
-<div class="close-btn" onclick="document.querySelector('.mobile-nav').classList.remove('active')">×</div>
-<a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('active')">About</a>
-<a href="#reviews" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Reviews</a>
-<a href="#approach" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Approach</a>
-<a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Contact Us</a>
+  <div class="close-btn" onclick="document.querySelector('.mobile-nav').classList.remove('active')">×</div>
+  <a href="#what-we-do" onclick="document.querySelector('.mobile-nav').classList.remove('active')">What We Do</a>
+  <a href="#approach" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Our Approach</a>
+  <a href="#track-record" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Results</a>
+  <a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Contact</a>
 </div>
+
 <main>
-<section class="hero">
-<h1 class="hero-title">Data-Driven Results</h1>
-<div class="hero-content">
-<div class="hero-symbol"></div>
-<p class="hero-text">We are data-driven, results-oriented digital marketing firm that specializes in crafting holistic, multi-channel campaigns.</p>
-<button class="btn-black">Book Online</button>
-</div>
-</section>
-<section class="about" id="about">
-<h2 class="section-title">Our Story</h2>
-<div class="about-grid">
-<div class="about-text">
-<p>At K. O'Reilly, we are passionate about crafting impactful digital campaigns that drive real results.</p>
-<p>Our expert team blends creativity with meticulous analysis to tailor campaigns that drive real results for each client. From brand building to conversion optimization, we leverage cutting-edge tools like Google Analytics and social media dashboards to ensure your success.</p>
-</div>
-<div class="about-image"></div>
-</div>
-</section>
-<section class="reviews" id="reviews">
-<h2 class="section-title">Client Reviews</h2>
-<div class="review-card">
-<div class="client-name">John Doe</div>
-<div class="review-text">"Working with K. O'Reilly transformed our digital strategy."</div>
-</div>
-<div class="review-card">
-<div class="client-name">Jane Smith</div>
-<div class="review-text">"Their innovative approach boosted our online presence."</div>
-</div>
-<div class="review-card">
-<div class="client-name">David Rodriguez</div>
-<div class="review-text">"K. O'Reilly's insight drove remarkable growth for our business."</div>
-</div>
-</section>
-<section class="approach" id="approach">
-<h2 class="section-title">Our Approach</h2>
-<div class="approach-card">
-<div class="approach-num">01</div>
-<div class="approach-text">
-<h3>Analysis</h3>
-<p>We analyze your data to uncover valuable insights. Our experts use this data to craft personalized strategies for your business.</p>
-</div>
-<div></div>
-</div>
-<div class="approach-card">
-<div class="approach-num">02</div>
-<div class="approach-text">
-<h3>Execution</h3>
-<p>We implement the strategies to drive tangible results for your brand. Our team ensures every campaign is optimized for maximum impact.</p>
-</div>
-<div></div>
-</div>
-</section>
-<section class="contact" id="contact">
-<div>
-<h2 class="section-title">Get In Touch</h2>
-<div class="footer-info">
-<a href="tel:123-456-7890">123-456-7890</a>
-<a href="mailto:info@mysite.com">info@mysite.com</a>
-<p>500 Terry Francine St.
-San Francisco, CA 94158</p>
-</div>
-</div>
-<div>
-<form>
-<div class="form-group">
-<input type="text" placeholder="First Name *" required>
-</div>
-<div class="form-group">
-<input type="text" placeholder="Last Name *" required>
-</div>
-<div class="form-group">
-<input type="email" placeholder="Email *" required>
-</div>
-<div class="form-group">
-<textarea placeholder="Message" rows="5"></textarea>
-</div>
-<button type="submit" class="btn-submit">Submit</button>
-</form>
-</div>
-</section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-tagline reveal-item">Creative • Production • Post</div>
+    <h1 class="hero-title reveal-item">Video Production Agency</h1>
+    <div class="hero-content reveal-item">
+      <div class="hero-symbol">▶</div>
+      <p class="hero-text">We make high-performing videos for leading brands. From viral short-form reels to commercial ad films, we turn ideas into scroll-stopping content that performs.</p>
+      <a href="#contact" class="btn-pill btn-hero">Start Project</a>
+    </div>
+  </section>
+
+  <!-- Marquee Logos with Local Images -->
+  <div class="brand-bar reveal-item">
+    <div class="brand-badge">Trusted By Top Brands</div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="brand-card-item"><img src="images/amazon.svg" alt="Amazon"></div>
+        <div class="brand-card-item"><img src="images/flipkart.svg" alt="Flipkart"></div>
+        <div class="brand-card-item"><img src="images/himalaya.svg" alt="Himalaya"></div>
+        <div class="brand-card-item"><img src="images/lenskart.svg" alt="Lenskart"></div>
+        <div class="brand-card-item"><img src="images/grt.svg" alt="GRT Jewellers"></div>
+        <div class="brand-card-item"><img src="images/dbs.svg" alt="DBS Bank"></div>
+        <div class="brand-card-item"><img src="images/finolex.png" alt="Finolex Pipes"></div>
+        <div class="brand-card-item"><img src="images/m4marry.png" alt="m4marry.com"></div>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <div class="brand-card-item"><img src="images/amazon.svg" alt="Amazon"></div>
+        <div class="brand-card-item"><img src="images/flipkart.svg" alt="Flipkart"></div>
+        <div class="brand-card-item"><img src="images/himalaya.svg" alt="Himalaya"></div>
+        <div class="brand-card-item"><img src="images/lenskart.svg" alt="Lenskart"></div>
+        <div class="brand-card-item"><img src="images/grt.svg" alt="GRT Jewellers"></div>
+        <div class="brand-card-item"><img src="images/dbs.svg" alt="DBS Bank"></div>
+        <div class="brand-card-item"><img src="images/finolex.png" alt="Finolex Pipes"></div>
+        <div class="brand-card-item"><img src="images/m4marry.png" alt="m4marry.com"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DO -->
+  <section class="section-wrapper" id="what-we-do">
+    <div class="wix-split-section">
+      <div class="wix-split-left reveal-item">
+        <h2 class="section-title-wix">What We Do</h2>
+        <div class="wix-decorative-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wix-split-right reveal-item">
+        <p class="lead">
+          At Handles, we are passionate about crafting impactful, algorithm-optimized video campaigns that drive real commercial results.
+        </p>
+        <div class="wix-service-list">
+          <div class="wix-service-item">
+            <h4>Short-Form Content</h4>
+            <p>Engineered for high algorithmic reach, personal branding, watch time, and rapid follower conversion.</p>
+          </div>
+          <div class="wix-service-item">
+            <h4>TVC Commercials</h4>
+            <p>Broadcast and digital commercial ad films built to retain audience attention in the first three seconds.</p>
+          </div>
+          <div class="wix-service-item">
+            <h4>Corporate Videos</h4>
+            <p>High-end narrative films communicating company scale, executive vision, and customer trust.</p>
+          </div>
+          <div class="wix-service-item">
+            <h4>Post-Production</h4>
+            <p>Studio-grade editing, color science, 3D/VFX motion graphics, and audio mastering.</p>
+          </div>
+        </div>
+        <a href="#contact" class="btn-pill">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR APPROACH (SAME COLOR AS BACKGROUND) -->
+  <section class="section-wrapper" id="approach">
+    <div class="reveal-item">
+      <h2 class="section-title-wix">Our Approach</h2>
+      <p class="section-subtitle-wix">Discover how we turn your requirements into high-performing content.</p>
+    </div>
+    <div class="wix-card-stack">
+      <div class="wix-capsule-card reveal-item">
+        <div class="wix-capsule-title">Concept</div>
+        <div class="wix-capsule-desc">
+          We analyze your target market and turn your requirement into a bulletproof creative hook.
+        </div>
+        <div class="wix-capsule-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wix-capsule-card reveal-item">
+        <div class="wix-capsule-title">Planning</div>
+        <div class="wix-capsule-desc">
+          We lock down the script, storyboard, shoot logistics, schedule, and casting setup.
+        </div>
+        <div class="wix-capsule-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wix-capsule-card reveal-item">
+        <div class="wix-capsule-title">Shoot</div>
+        <div class="wix-capsule-desc">
+          We capture everything on-set with professional precision, directing every frame and angle.
+        </div>
+        <div class="wix-capsule-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wix-capsule-card reveal-item">
+        <div class="wix-capsule-title">Edit & Delivery</div>
+        <div class="wix-capsule-desc">
+          We edit it clean, grade it, mix the sound, and deliver final content formatted to perform across platforms.
+        </div>
+        <div class="wix-capsule-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDE METRICS SECTION -->
+  <div class="metrics-wrapper-wide">
+    <section class="metrics reveal-item" id="track-record">
+      <h2 class="section-title-wix">Proven Track Record</h2>
+      <p class="metrics-subtitle">Verified metrics generated across Instagram, YouTube, and multi-channel campaigns.</p>
+      
+      <div class="metric-row-single">
+        <div class="metric-box-card">
+          <h3>15.3M+</h3>
+          <p>Total Impressions</p>
+        </div>
+        <div class="metric-box-card">
+          <h3>1M+</h3>
+          <p>Engagements</p>
+        </div>
+        <div class="metric-box-card">
+          <h3>32-48%</h3>
+          <p>Engagement Rate</p>
+        </div>
+        <div class="metric-box-card">
+          <h3>100k+</h3>
+          <p>New Followers</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="section-wrapper" id="contact">
+    <div class="contact-container reveal-item">
+      <div>
+        <h2 class="section-title-wix">Let's Work Together</h2>
+        <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
+        <div class="footer-info">
+          <p style="color: #666;">Phone / WhatsApp</p>
+          <a href="tel:+917904606332">+91 79046 06332</a>
+          <br><br>
+          <p style="color: #666;">Direct Email</p>
+          <a href="mailto:hellohandles@gmail.com">hellohandles@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <form onsubmit="event.preventDefault(); alert('Inquiry Sent Successfully');">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name *" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Company / Brand Name *" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email Address *" required>
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Tell us about your project (Reels, TVC, Corporate, etc.)" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-pill" style="border:none; cursor:pointer;">Submit Brief</button>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
+
+<!-- Scroll Reveal Animation Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const revealElements = document.querySelectorAll(".reveal-item");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -30px 0px"
+  });
+
+  revealElements.forEach((el) => observer.observe(el));
+});
+</script>
+
+<!-- Universal Video Reticle Cursor (Desktop, iPad, Android & iPhone) -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dot = document.getElementById("cursorDot");
+  const ring = document.getElementById("cursorRing");
+
+  if (!dot || !ring) return;
+
+  let posX = window.innerWidth / 2;
+  let posY = window.innerHeight / 2;
+  let ringX = posX;
+  let ringY = posY;
+  let scrollTimeout;
+  let touchTimeout;
+
+  function showCursor() {
+    dot.classList.add("is-active");
+    ring.classList.add("is-active");
+  }
+
+  function hideCursor() {
+    dot.classList.remove("is-active");
+    ring.classList.remove("is-active");
+  }
+
+  window.addEventListener("mousemove", (e) => {
+    posX = e.clientX;
+    posY = e.clientY;
+    showCursor();
+
+    dot.style.left = `${posX}px`;
+    dot.style.top = `${posY}px`;
+  });
+
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches.length > 0) {
+      posX = e.touches[0].clientX;
+      posY = e.touches[0].clientY;
+      ringX = posX;
+      ringY = posY;
+      showCursor();
+      dot.style.left = `${posX}px`;
+      dot.style.top = `${posY}px`;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      posX = e.touches[0].clientX;
+      posY = e.touches[0].clientY;
+      showCursor();
+      dot.style.left = `${posX}px`;
+      dot.style.top = `${posY}px`;
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    clearTimeout(touchTimeout);
+    touchTimeout = setTimeout(() => {
+      hideCursor();
+    }, 1200);
+  });
+
+  function animateRing() {
+    ringX += (posX - ringX) * 0.18;
+    ringY += (posY - ringY) * 0.18;
+
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  window.addEventListener("scroll", () => {
+    showCursor();
+    ring.classList.add("is-scrolling");
+    dot.classList.add("is-scrolling");
+
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      ring.classList.remove("is-scrolling");
+      dot.classList.remove("is-scrolling");
+      
+      if (window.matchMedia("(hover: none)").matches) {
+        hideCursor();
+      }
+    }, 250);
+  }, { passive: true });
+
+  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  interactiveTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
+    el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
+  });
+});
+</script>
+
+<!-- Google Translate Integration -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'ar,en,hi,ur,fr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
