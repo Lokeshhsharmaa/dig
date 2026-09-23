@@ -31,7 +31,7 @@ body {
 }
 
 /* ========================================================
-   EXACT RETICLE CURSOR FROM SCREENSHOT (SPINS ON MOVE & SCROLL)
+   EXACT RETICLE CURSOR MATCHING YOUR PHOTO
    ======================================================== */
 @media (hover: hover) and (pointer: fine) {
   body {
@@ -42,65 +42,77 @@ body {
   }
 }
 
-.cursor-dot {
+/* Unified Cursor Container: Keeps the Dot exactly centered inside the Ring */
+.handles-cursor-wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px;
-  height: 10px;
-  background-color: #FF2020;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 999999;
   opacity: 0;
   will-change: transform, opacity;
   transform: translate3d(-50%, -50%, 0);
-  transition: opacity 0.25s ease;
-  box-shadow: 0 0 6px rgba(255, 32, 32, 0.6);
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 44px;
-  height: 44px;
-  border: 1.5px dotted #FF2020; /* Dotted red circle matching your photo */
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  opacity: 0;
-  will-change: transform, opacity;
-  transform: translate3d(-50%, -50%, 0);
-  box-shadow: 0 0 16px rgba(255, 32, 32, 0.28); /* Ambient soft red glow */
-  transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease;
-}
-
-.cursor-dot.is-active,
-.cursor-ring.is-active {
+.handles-cursor-wrapper.is-active {
   opacity: 1;
 }
 
-/* Continuously spins around when moving or scrolling */
-.cursor-ring.is-spinning {
-  animation: spinRound 1.8s linear infinite;
+/* Outer Dotted Circle (with red aura glow matching image) */
+.handles-cursor-ring {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.6px dotted #FF2020;
+  background: radial-gradient(circle, rgba(255, 32, 32, 0.14) 0%, rgba(255, 32, 32, 0.04) 60%, transparent 85%);
+  box-shadow: 0 0 14px rgba(255, 32, 32, 0.3);
+  pointer-events: none;
+  will-change: transform;
+  transform: rotate(0deg);
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
 }
 
-/* Pressed / Hover state */
-.cursor-ring.is-pressed,
-.cursor-ring.is-hovering {
+/* Red Center Dot */
+.handles-cursor-dot {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  background-color: #FF2020;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(255, 32, 32, 0.5);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Circular spinning motion when cursor is actively moving or scrolling */
+.handles-cursor-wrapper.is-moving .handles-cursor-ring,
+.handles-cursor-wrapper.is-scrolling .handles-cursor-ring {
+  animation: spinRing 2.2s linear infinite;
+  box-shadow: 0 0 18px rgba(255, 32, 32, 0.45);
+}
+
+/* Subtle tap/hover response */
+.handles-cursor-wrapper.is-hovering .handles-cursor-ring,
+.handles-cursor-wrapper.is-pressed .handles-cursor-ring {
   width: 52px;
   height: 52px;
-  box-shadow: 0 0 22px rgba(255, 32, 32, 0.4);
+  background: radial-gradient(circle, rgba(255, 32, 32, 0.22) 0%, rgba(255, 32, 32, 0.08) 65%, transparent 90%);
 }
 
-@keyframes spinRound {
-  from {
-    transform: translate3d(-50%, -50%, 0) rotate(0deg);
-  }
-  to {
-    transform: translate3d(-50%, -50%, 0) rotate(360deg);
-  }
+.handles-cursor-wrapper.is-pressed .handles-cursor-dot {
+  transform: scale(1.3);
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* --- Language Selector Bar --- */
@@ -776,9 +788,11 @@ nav a:hover {
 </head>
 <body>
 
-<!-- Custom Video Reticle Cursor Elements -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- Exact Reticle Cursor (Circle with Red Dot in the Center) -->
+<div class="handles-cursor-wrapper" id="handlesCursor">
+  <div class="handles-cursor-ring"></div>
+  <div class="handles-cursor-dot"></div>
+</div>
 
 <!-- Language Switcher Bar -->
 <div class="lang-bar">
@@ -1011,13 +1025,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Precise Dotted Reticle Tracking Script (Smooth Touch & Continuous Spin on Move) -->
+<!-- Precise Reticle Cursor Engine (Always keeps Dot centered, smooth touch glide, spin on move) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const dot = document.getElementById("cursorDot");
-  const ring = document.getElementById("cursorRing");
-
-  if (!dot || !ring) return;
+  const cursor = document.getElementById("handlesCursor");
+  if (!cursor) return;
 
   let targetX = window.innerWidth / 2;
   let targetY = window.innerHeight / 2;
@@ -1025,110 +1037,121 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentY = targetY;
 
   let isVisible = false;
-  let spinTimeout = null;
-  let touchFadeTimeout = null;
-  let isTouching = false;
+  let movingTimer = null;
+  let scrollTimer = null;
+  let touchFadeTimer = null;
 
-  function showCursor() {
+  function activateCursor() {
     if (!isVisible) {
-      dot.classList.add("is-active");
-      ring.classList.add("is-active");
+      cursor.classList.add("is-active");
       isVisible = true;
     }
   }
 
-  function hideCursor() {
-    if (isVisible) {
-      dot.classList.remove("is-active");
-      ring.classList.remove("is-active");
-      ring.classList.remove("is-spinning");
-      ring.classList.remove("is-pressed");
-      isVisible = false;
-    }
+  function setMovingState() {
+    activateCursor();
+    cursor.classList.add("is-moving");
+    clearTimeout(movingTimer);
+    movingTimer = setTimeout(() => {
+      cursor.classList.remove("is-moving");
+    }, 140);
   }
 
-  function startSpin() {
-    ring.classList.add("is-spinning");
-    clearTimeout(spinTimeout);
-    spinTimeout = setTimeout(() => {
-      ring.classList.remove("is-spinning");
-    }, 280);
-  }
-
-  // Mouse tracking (Mac/Laptop)
-  window.addEventListener("mousemove", (e) => {
+  // Desktop Pointer / Mouse movement
+  window.addEventListener("pointermove", (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
-    showCursor();
-    startSpin();
+    setMovingState();
+
+    if (e.pointerType === "touch") {
+      clearTimeout(touchFadeTimer);
+      touchFadeTimer = setTimeout(() => {
+        cursor.classList.remove("is-active");
+        isVisible = false;
+      }, 1000);
+    }
+  }, { passive: true });
+
+  window.addEventListener("pointerdown", (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    activateCursor();
+    cursor.classList.add("is-pressed");
+    setMovingState();
+  }, { passive: true });
+
+  window.addEventListener("pointerup", () => {
+    cursor.classList.remove("is-pressed");
   }, { passive: true });
 
   window.addEventListener("mouseleave", () => {
-    hideCursor();
+    cursor.classList.remove("is-active");
+    cursor.classList.remove("is-moving");
+    isVisible = false;
   });
 
-  // Touch tracking (Phone, iPad, Tablets)
-  function handleTouch(e) {
+  // Touch Support for iPhone, iPad, and Tablets: glides smoothly to tap location
+  function handleDirectTouch(e) {
     if (e.touches && e.touches.length > 0) {
       targetX = e.touches[0].clientX;
       targetY = e.touches[0].clientY;
-      isTouching = true;
+      activateCursor();
+      setMovingState();
 
-      showCursor();
-      startSpin();
-      ring.classList.add("is-pressed");
-
-      clearTimeout(touchFadeTimeout);
+      clearTimeout(touchFadeTimer);
     }
   }
 
-  window.addEventListener("touchstart", handleTouch, { passive: true });
-  window.addEventListener("touchmove", handleTouch, { passive: true });
+  window.addEventListener("touchstart", handleDirectTouch, { passive: true });
+  window.addEventListener("touchmove", handleDirectTouch, { passive: true });
 
   window.addEventListener("touchend", () => {
-    isTouching = false;
-    ring.classList.remove("is-pressed");
-
-    clearTimeout(touchFadeTimeout);
-    touchFadeTimeout = setTimeout(() => {
-      hideCursor();
-    }, 1100);
-  }, { passive: true });
-
-  window.addEventListener("touchcancel", () => {
-    isTouching = false;
-    hideCursor();
+    clearTimeout(touchFadeTimer);
+    touchFadeTimer = setTimeout(() => {
+      cursor.classList.remove("is-active");
+      cursor.classList.remove("is-moving");
+      isVisible = false;
+    }, 900);
   });
 
-  // Smooth easing loop: glides seamlessly across mouse and touch
-  function renderLoop() {
+  // Smooth Physics Lerp: Dot & Ring stay locked together and glide fluidly
+  function updateCursorPhysics() {
     if (isVisible) {
       currentX += (targetX - currentX) * 0.22;
       currentY += (targetY - currentY) * 0.22;
-
-      dot.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
-      ring.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
     }
-    requestAnimationFrame(renderLoop);
+    requestAnimationFrame(updateCursorPhysics);
   }
-  requestAnimationFrame(renderLoop);
+  requestAnimationFrame(updateCursorPhysics);
 
-  // Scroll reaction: keeps rotating while scrolling the screen
+  // Scroll Reaction across all devices
   window.addEventListener("scroll", () => {
-    showCursor();
-    startSpin();
+    activateCursor();
+    cursor.classList.add("is-scrolling");
 
-    if (!isTouching && window.matchMedia("(hover: none)").matches) {
-      clearTimeout(touchFadeTimeout);
-      touchFadeTimeout = setTimeout(hideCursor, 600);
-    }
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      cursor.classList.remove("is-scrolling");
+      if (window.matchMedia("(hover: none)").matches) {
+        clearTimeout(touchFadeTimer);
+        touchFadeTimer = setTimeout(() => {
+          cursor.classList.remove("is-active");
+          isVisible = false;
+        }, 600);
+      }
+    }, 180);
   }, { passive: true });
 
-  // Hover effect on clickable elements
-  const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
-  targets.forEach((el) => {
-    el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
-    el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
+  // Hover states on buttons/links
+  const hoverTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  hoverTargets.forEach((el) => {
+    el.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "touch") cursor.classList.add("is-hovering");
+    });
+    el.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "touch") cursor.classList.remove("is-hovering");
+    });
   });
 });
 </script>
