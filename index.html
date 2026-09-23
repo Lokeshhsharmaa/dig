@@ -31,12 +31,8 @@ body {
 }
 
 /* ========================================================
-   CLEAN, LAG-FREE DESKTOP CURSOR (DISABLED ON MOBILE/TOUCH)
+   UNIVERSAL RETICLE CURSOR (DESKTOP, MAC, IPAD, PHONES)
    ======================================================== */
-.cursor-dot, .cursor-ring {
-  display: none; /* Hidden by default on mobile / touch */
-}
-
 @media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
@@ -44,66 +40,86 @@ body {
   a, button, input, textarea, select {
     cursor: none !important;
   }
+}
 
-  .cursor-dot {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    background-color: #FF2020;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    will-change: transform;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
+.universal-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background-color: #FF2020;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(-50%, -50%, 0);
+}
 
-  .cursor-ring {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    border: 1.5px solid rgba(255, 32, 32, 0.7);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99998;
-    will-change: transform, width, height, border-color;
-    opacity: 0;
-    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
-  }
+.universal-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 32, 32, 0.65);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  will-change: transform, width, height, opacity, border-color;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .cursor-dot.is-active,
-  .cursor-ring.is-active {
-    opacity: 1;
-  }
+/* Active State */
+.universal-cursor-dot.is-active,
+.universal-cursor-ring.is-active {
+  opacity: 1;
+}
 
-  /* Scrolling reaction: subtle clean expansion */
-  .cursor-ring.is-scrolling {
-    width: 44px;
-    height: 44px;
-    border-color: #FF2020;
-    border-style: dashed;
-    animation: rotateReticle 4s linear infinite;
-  }
+/* Scrolling Reticle across all devices */
+.universal-cursor-ring.is-scrolling {
+  width: 48px;
+  height: 48px;
+  border-color: #FF2020;
+  border-style: dashed;
+  animation: rotateReticle 3.5s linear infinite;
+  box-shadow: 0 0 14px rgba(255, 32, 32, 0.3);
+}
 
-  /* Hover state on interactive elements */
-  .cursor-ring.is-hovering {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 32, 32, 0.1);
-    border-color: #FF2020;
-    border-style: solid;
-  }
+.universal-cursor-dot.is-scrolling {
+  transform: translate3d(-50%, -50%, 0) scale(1.4);
+  box-shadow: 0 0 8px #FF2020;
+}
 
-  @keyframes rotateReticle {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
+/* Hovering on Desktop & Pressing on Touch Devices */
+.universal-cursor-ring.is-hovering,
+.universal-cursor-ring.is-pressed {
+  width: 54px;
+  height: 54px;
+  background-color: rgba(255, 32, 32, 0.12);
+  border-color: #FF2020;
+  border-style: solid;
+}
+
+.universal-cursor-dot.is-pressed {
+  transform: translate3d(-50%, -50%, 0) scale(1.6);
+}
+
+@keyframes rotateReticle {
+  from { transform: translate3d(-50%, -50%, 0) rotate(0deg); }
+  to { transform: translate3d(-50%, -50%, 0) rotate(360deg); }
 }
 
 /* --- Language Selector Bar --- */
@@ -324,7 +340,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee --- */
+/* --- Brand Marquee (Even spacing on both loops) --- */
 .brand-bar {
   width: 100%;
   margin: 0 auto clamp(40px, 5vw, 70px);
@@ -779,9 +795,9 @@ nav a:hover {
 </head>
 <body>
 
-<!-- Custom Video Reticle Cursor Elements (Desktop Only) -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- Universal Reticle Cursor Elements -->
+<div class="universal-cursor-dot" id="cursorDot"></div>
+<div class="universal-cursor-ring" id="cursorRing"></div>
 
 <!-- Language Switcher Bar -->
 <div class="lang-bar">
@@ -1014,78 +1030,135 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Lightweight Desktop-Only Smooth Cursor Tracking -->
+<!-- Universal Natural Responsive Cursor Animation (All Devices) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Guard check: only run on devices with a real pointer/mouse (never runs on phones, iPads, tablets)
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    return;
-  }
-
   const dot = document.getElementById("cursorDot");
   const ring = document.getElementById("cursorRing");
+
   if (!dot || !ring) return;
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-  let scrollTimeout;
-  let initialized = false;
+  let posX = window.innerWidth / 2;
+  let posY = window.innerHeight / 2;
+  let ringX = posX;
+  let ringY = posY;
+  let isPointerDown = false;
+  let isVisible = false;
+  let scrollTimeout = null;
+  let touchTimeout = null;
 
-  window.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if (!initialized) {
-      ringX = mouseX;
-      ringY = mouseY;
+  function setVisibility(visible) {
+    if (visible && !isVisible) {
       dot.classList.add("is-active");
       ring.classList.add("is-active");
-      initialized = true;
+      isVisible = true;
+    } else if (!visible && isVisible) {
+      dot.classList.remove("is-active");
+      ring.classList.remove("is-active");
+      ring.classList.remove("is-scrolling");
+      ring.classList.remove("is-pressed");
+      dot.classList.remove("is-pressed");
+      isVisible = false;
     }
+  }
 
-    dot.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
+  // Pointer Movement: Mouse, Trackpad, Finger, or Apple Pencil
+  window.addEventListener("pointermove", (e) => {
+    posX = e.clientX;
+    posY = e.clientY;
+    setVisibility(true);
+
+    // Direct hardware-accelerated snap for the center dot
+    dot.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+
+    // Touch auto-fade when finger is lifted and idle
+    if (e.pointerType === "touch") {
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        if (!isPointerDown) setVisibility(false);
+      }, 1000);
+    }
   }, { passive: true });
 
+  window.addEventListener("pointerdown", (e) => {
+    posX = e.clientX;
+    posY = e.clientY;
+    isPointerDown = true;
+    setVisibility(true);
+
+    ring.classList.add("is-pressed");
+    dot.classList.add("is-pressed");
+    dot.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+  }, { passive: true });
+
+  window.addEventListener("pointerup", (e) => {
+    isPointerDown = false;
+    ring.classList.remove("is-pressed");
+    dot.classList.remove("is-pressed");
+
+    if (e.pointerType === "touch") {
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        setVisibility(false);
+      }, 700);
+    }
+  }, { passive: true });
+
+  window.addEventListener("pointercancel", () => {
+    isPointerDown = false;
+    ring.classList.remove("is-pressed");
+    dot.classList.remove("is-pressed");
+    setVisibility(false);
+  });
+
   window.addEventListener("mouseleave", () => {
-    dot.classList.remove("is-active");
-    ring.classList.remove("is-active");
+    setVisibility(false);
   });
 
-  window.addEventListener("mouseenter", () => {
-    if (initialized) {
-      dot.classList.add("is-active");
-      ring.classList.add("is-active");
+  // Natural Smooth Follow Loop (60-120Hz compatible on ProMotion Displays)
+  function renderLoop() {
+    if (isVisible) {
+      // Natural spring easing
+      ringX += (posX - ringX) * 0.22;
+      ringY += (posY - ringY) * 0.22;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
     }
-  });
-
-  // Fast, responsive 60fps follow loop
-  function updateRing() {
-    if (initialized) {
-      ringX += (mouseX - ringX) * 0.25;
-      ringY += (mouseY - ringY) * 0.25;
-      ring.style.transform = `translate3d(${ringX - 16}px, ${ringY - 16}px, 0)`;
-    }
-    requestAnimationFrame(updateRing);
+    requestAnimationFrame(renderLoop);
   }
-  requestAnimationFrame(updateRing);
+  requestAnimationFrame(renderLoop);
 
-  // Scroll Reticle Effect
+  // Natural Scroll Reticle (Works smoothly across trackpads, wheels & finger swipe)
   window.addEventListener("scroll", () => {
+    setVisibility(true);
     ring.classList.add("is-scrolling");
+    dot.classList.add("is-scrolling");
 
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       ring.classList.remove("is-scrolling");
-    }, 150);
+      dot.classList.remove("is-scrolling");
+
+      // Fade out on touch devices if finger is not touching the screen
+      if (!isPointerDown && window.matchMedia("(hover: none)").matches) {
+        clearTimeout(touchTimeout);
+        touchTimeout = setTimeout(() => setVisibility(false), 400);
+      }
+    }, 180);
   }, { passive: true });
 
-  // Hover Magnifier
-  const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
-  targets.forEach((el) => {
-    el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
-    el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
+  // Interactive Hover for links, buttons & clickable cards
+  const interactiveElements = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  interactiveElements.forEach((el) => {
+    el.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "touch") {
+        ring.classList.add("is-hovering");
+      }
+    });
+    el.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "touch") {
+        ring.classList.remove("is-hovering");
+      }
+    });
   });
 });
 </script>
