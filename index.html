@@ -158,7 +158,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 5vw;
+  padding: 16px 5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -168,11 +168,11 @@ header {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
 }
 .logo-img {
-  height: 38px;
+  height: 36px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -180,7 +180,7 @@ header {
 .logo-text {
   font-family: 'Syne', sans-serif;
   font-weight: 900;
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   letter-spacing: -0.5px;
   color: #FF2020;
   text-transform: uppercase;
@@ -252,25 +252,25 @@ nav a:hover {
 .hero {
   background-color: #111111;
   color: #ffffff;
-  padding: clamp(70px, 10vw, 130px) 5vw clamp(60px, 8vw, 100px);
-  border-radius: 0 0 clamp(30px, 4vw, 50px) clamp(30px, 4vw, 50px);
-  margin-bottom: clamp(50px, 6vw, 80px);
+  padding: clamp(60px, 8vw, 120px) 5vw clamp(50px, 6vw, 90px);
+  border-radius: 0 0 clamp(26px, 4vw, 50px) clamp(26px, 4vw, 50px);
+  margin-bottom: clamp(40px, 5vw, 70px);
 }
 .hero-tagline {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #FF2020;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-weight: 700;
 }
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-size: clamp(2.4rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -1.5px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   text-transform: capitalize;
   background: linear-gradient(45deg, #FF2020, #ff8800, #ffffff);
   -webkit-background-clip: text;
@@ -283,18 +283,18 @@ nav a:hover {
   gap: clamp(20px, 3vw, 40px);
 }
 .hero-symbol {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   background-color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   color: #111;
 }
 .hero-text {
-  font-size: clamp(16px, 1.8vw, 18px);
+  font-size: clamp(15px, 1.6vw, 18px);
   line-height: 1.6;
   color: #bbbbbb;
   max-width: 650px;
@@ -304,10 +304,10 @@ nav a:hover {
 .btn-pill {
   background-color: #111111;
   color: #ffffff;
-  padding: 14px 30px;
+  padding: 12px 26px;
   border: none;
   border-radius: 50px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -331,37 +331,45 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee (Card & Logo Alignment Fix) --- */
+/* --- Brand Marquee (FIXED MOBILE BADGE & LOGO ALIGNMENT) --- */
 .brand-bar {
   width: 100%;
-  margin: 0 auto clamp(50px, 6vw, 80px);
+  margin: 0 auto clamp(40px, 5vw, 70px);
   overflow: hidden;
   text-align: center;
 }
+
+/* The badge is strictly fit-content and won't expand to full phone width */
 .brand-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: #111111;
   color: #ffffff;
-  padding: 8px 24px;
+  padding: 6px 18px;
   border-radius: 30px;
   font-family: 'Syne', sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   font-weight: 800;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: auto !important;
+  max-width: fit-content;
+  white-space: nowrap;
 }
 .brand-badge::before {
   content: "";
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background-color: #FF2020;
   border-radius: 50%;
   display: inline-block;
+  flex-shrink: 0;
 }
+
 .marquee-container {
   display: flex;
   overflow: hidden;
@@ -369,46 +377,60 @@ nav a:hover {
   position: relative;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  padding: 10px 0;
+  padding: 8px 0;
 }
 .marquee-track {
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: space-around;
-  gap: 20px;
+  gap: 16px;
   animation: scrollMarquee 26s linear infinite;
   min-width: 100%;
 }
 .marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
+
+/* Uniform, perfectly centered cards */
 .brand-card-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 64px;
-  width: 145px;
+  height: 58px;
+  width: 140px;
   flex-shrink: 0;
-  padding: 10px 18px;
+  padding: 8px 16px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .brand-card-item:hover {
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
+
+/* Perfect alignment for all logos, wide or tall */
 .brand-card-item img {
-  max-height: 32px;
-  max-width: 100%;
+  max-height: 28px;
+  max-width: 106px;
   width: auto;
   height: auto;
   object-fit: contain;
+  object-position: center;
   display: block;
   margin: 0 auto;
+}
+
+/* Slightly upscale wide-aspect logos so they aren't miniature */
+.brand-card-item img[src*="m4marry"] {
+  max-height: 34px;
+  max-width: 115px;
+}
+.brand-card-item img[src*="amazon"] {
+  max-height: 26px;
 }
 
 @keyframes scrollMarquee {
@@ -420,7 +442,7 @@ nav a:hover {
 .section-wrapper {
   max-width: 1360px;
   margin: 0 auto;
-  padding: clamp(45px, 6vw, 85px) 4vw;
+  padding: clamp(40px, 5vw, 80px) 4vw;
 }
 
 .section-title-wix {
@@ -731,18 +753,31 @@ nav a:hover {
     display: none;
   }
   .btn-pill {
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 22px;
+    font-size: 13.5px;
   }
 }
 @media (max-width: 520px) {
   .metric-row-single {
     grid-template-columns: 1fr;
   }
+  .brand-badge {
+    font-size: 10px;
+    padding: 5px 14px;
+    letter-spacing: 1.5px;
+  }
   .brand-card-item {
     width: 125px;
-    height: 56px;
-    padding: 8px 12px;
+    height: 52px;
+    padding: 6px 12px;
+  }
+  .brand-card-item img {
+    max-height: 24px;
+    max-width: 95px;
+  }
+  .brand-card-item img[src*="m4marry"] {
+    max-height: 30px;
+    max-width: 105px;
   }
 }
 </style>
