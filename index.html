@@ -31,8 +31,12 @@ body {
 }
 
 /* ========================================================
-   CUSTOM HIGH-PERFORMANCE CURSOR (DESKTOP, TAB & PHONE)
+   CLEAN, LAG-FREE DESKTOP CURSOR (DISABLED ON MOBILE/TOUCH)
    ======================================================== */
+.cursor-dot, .cursor-ring {
+  display: none; /* Hidden by default on mobile / touch */
+}
+
 @media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
@@ -40,93 +44,66 @@ body {
   a, button, input, textarea, select {
     cursor: none !important;
   }
-}
 
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  background-color: #FF2020;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  opacity: 0;
-  will-change: transform, opacity;
-  transition: opacity 0.2s ease;
-}
+  .cursor-dot {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #FF2020;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
 
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(255, 32, 32, 0.7);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  opacity: 0;
-  will-change: transform, width, height, opacity;
-  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.22s ease,
-              border-color 0.22s ease,
-              background-color 0.22s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .cursor-ring {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid rgba(255, 32, 32, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    will-change: transform, width, height, border-color;
+    opacity: 0;
+    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  }
 
-.cursor-dot.is-active,
-.cursor-ring.is-active {
-  opacity: 1;
-}
+  .cursor-dot.is-active,
+  .cursor-ring.is-active {
+    opacity: 1;
+  }
 
-/* Viewfinder Shutter rotation on scroll */
-.cursor-ring.is-scrolling {
-  width: 52px;
-  height: 52px;
-  border-color: #FF2020;
-  border-style: dashed;
-  animation: rotateReticle 3s linear infinite;
-  box-shadow: 0 0 16px rgba(255, 32, 32, 0.4);
-}
+  /* Scrolling reaction: subtle clean expansion */
+  .cursor-ring.is-scrolling {
+    width: 44px;
+    height: 44px;
+    border-color: #FF2020;
+    border-style: dashed;
+    animation: rotateReticle 4s linear infinite;
+  }
 
-.cursor-dot.is-scrolling {
-  transform: scale(1.6);
-  background-color: #FF2020;
-  box-shadow: 0 0 10px #FF2020;
-}
+  /* Hover state on interactive elements */
+  .cursor-ring.is-hovering {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 32, 32, 0.1);
+    border-color: #FF2020;
+    border-style: solid;
+  }
 
-/* Touch active / tap animation on Mobile & iPad */
-.cursor-ring.is-touching {
-  width: 58px;
-  height: 58px;
-  border-color: #FF2020;
-  background-color: rgba(255, 32, 32, 0.15);
-  box-shadow: 0 0 18px rgba(255, 32, 32, 0.45);
-}
-
-.cursor-dot.is-touching {
-  transform: scale(1.8);
-  background-color: #FF2020;
-  box-shadow: 0 0 12px #FF2020;
-}
-
-/* Hover on clickable elements (Desktop) */
-.cursor-ring.is-hovering {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255, 32, 32, 0.12);
-  border-color: #FF2020;
-  border-style: solid;
-}
-
-@keyframes rotateReticle {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  @keyframes rotateReticle {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
 }
 
 /* --- Language Selector Bar --- */
@@ -802,7 +779,7 @@ nav a:hover {
 </head>
 <body>
 
-<!-- Custom Video Reticle Cursor Elements -->
+<!-- Custom Video Reticle Cursor Elements (Desktop Only) -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -1037,109 +1014,74 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- High Performance GPU-Accelerated Video Reticle Cursor (Mobile, Tablet & Desktop) -->
+<!-- Lightweight Desktop-Only Smooth Cursor Tracking -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // Guard check: only run on devices with a real pointer/mouse (never runs on phones, iPads, tablets)
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    return;
+  }
+
   const dot = document.getElementById("cursorDot");
   const ring = document.getElementById("cursorRing");
-
   if (!dot || !ring) return;
 
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight / 2;
-  let ringX = targetX;
-  let ringY = targetY;
+  let mouseX = 0;
+  let mouseY = 0;
+  let ringX = 0;
+  let ringY = 0;
   let scrollTimeout;
-  let touchFadeTimeout;
-  let isTouching = false;
+  let initialized = false;
 
-  function setCursorActive(active) {
-    if (active) {
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!initialized) {
+      ringX = mouseX;
+      ringY = mouseY;
       dot.classList.add("is-active");
       ring.classList.add("is-active");
-    } else {
-      dot.classList.remove("is-active");
-      ring.classList.remove("is-active");
-      ring.classList.remove("is-touching");
-      dot.classList.remove("is-touching");
+      initialized = true;
     }
-  }
 
-  // Mouse Movement on Desktop (Mac / PC)
-  window.addEventListener("mousemove", (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
-    setCursorActive(true);
-
-    // Hardware accelerated positioning
-    dot.style.transform = `translate3d(${targetX - 4}px, ${targetY - 4}px, 0)`;
+    dot.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
   }, { passive: true });
 
-  // Touch Interactions for Phones, Tablets, and iPad
-  function handleTouch(e) {
-    if (e.touches && e.touches.length > 0) {
-      targetX = e.touches[0].clientX;
-      targetY = e.touches[0].clientY;
-      ringX = targetX;
-      ringY = targetY;
-      isTouching = true;
+  window.addEventListener("mouseleave", () => {
+    dot.classList.remove("is-active");
+    ring.classList.remove("is-active");
+  });
 
-      setCursorActive(true);
-      ring.classList.add("is-touching");
-      dot.classList.add("is-touching");
-
-      dot.style.transform = `translate3d(${targetX - 4}px, ${targetY - 4}px, 0)`;
-      ring.style.transform = `translate3d(${targetX - 29}px, ${targetY - 29}px, 0)`;
-
-      clearTimeout(touchFadeTimeout);
+  window.addEventListener("mouseenter", () => {
+    if (initialized) {
+      dot.classList.add("is-active");
+      ring.classList.add("is-active");
     }
-  }
+  });
 
-  window.addEventListener("touchstart", handleTouch, { passive: true });
-  window.addEventListener("touchmove", handleTouch, { passive: true });
-
-  window.addEventListener("touchend", () => {
-    isTouching = false;
-    ring.classList.remove("is-touching");
-    dot.classList.remove("is-touching");
-
-    clearTimeout(touchFadeTimeout);
-    touchFadeTimeout = setTimeout(() => {
-      setCursorActive(false);
-    }, 600);
-  }, { passive: true });
-
-  // Ultra-Smooth 60FPS Lerp Loop using Translate3d
-  function renderFrame() {
-    if (!isTouching) {
-      ringX += (targetX - ringX) * 0.22;
-      ringY += (targetY - ringY) * 0.22;
-      ring.style.transform = `translate3d(${ringX - 18}px, ${ringY - 18}px, 0)`;
+  // Fast, responsive 60fps follow loop
+  function updateRing() {
+    if (initialized) {
+      ringX += (mouseX - ringX) * 0.25;
+      ringY += (mouseY - ringY) * 0.25;
+      ring.style.transform = `translate3d(${ringX - 16}px, ${ringY - 16}px, 0)`;
     }
-
-    requestAnimationFrame(renderFrame);
+    requestAnimationFrame(updateRing);
   }
-  renderFrame();
+  requestAnimationFrame(updateRing);
 
-  // Scroll Reticle: Rotates like a viewfinder camera shutter on scroll across all devices
+  // Scroll Reticle Effect
   window.addEventListener("scroll", () => {
-    setCursorActive(true);
     ring.classList.add("is-scrolling");
-    dot.classList.add("is-scrolling");
 
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       ring.classList.remove("is-scrolling");
-      dot.classList.remove("is-scrolling");
-
-      // Auto-hide when scrolling stops on touch screens
-      if (!isTouching && window.matchMedia("(hover: none)").matches) {
-        setCursorActive(false);
-      }
-    }, 220);
+    }, 150);
   }, { passive: true });
 
-  // Hover magnification for clickable elements on desktop
+  // Hover Magnifier
   const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
   targets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
