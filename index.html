@@ -31,7 +31,7 @@ body {
 }
 
 /* ========================================================
-   CUSTOM VIDEO-AGENCY CURSOR (DESKTOP, TAB & PHONE)
+   CUSTOM HIGH-PERFORMANCE CURSOR (DESKTOP, TAB & PHONE)
    ======================================================== */
 @media (hover: hover) and (pointer: fine) {
   body {
@@ -52,9 +52,9 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.15s ease;
+  will-change: transform, opacity;
+  transition: opacity 0.2s ease;
 }
 
 .cursor-ring {
@@ -63,18 +63,17 @@ body {
   left: 0;
   width: 36px;
   height: 36px;
-  border: 1.5px solid rgba(255, 32, 32, 0.65);
+  border: 1.5px solid rgba(255, 32, 32, 0.7);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
-  transform: translate(-50%, -50%);
   opacity: 0;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s ease,
-              border-color 0.25s ease,
-              background-color 0.25s ease,
-              transform 0.1s ease-out;
+  will-change: transform, width, height, opacity;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.22s ease,
+              border-color 0.22s ease,
+              background-color 0.22s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,21 +84,38 @@ body {
   opacity: 1;
 }
 
+/* Viewfinder Shutter rotation on scroll */
 .cursor-ring.is-scrolling {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   border-color: #FF2020;
   border-style: dashed;
-  animation: rotateReticle 3.5s linear infinite;
-  box-shadow: 0 0 16px rgba(255, 32, 32, 0.35);
+  animation: rotateReticle 3s linear infinite;
+  box-shadow: 0 0 16px rgba(255, 32, 32, 0.4);
 }
 
 .cursor-dot.is-scrolling {
-  transform: translate(-50%, -50%) scale(1.5);
+  transform: scale(1.6);
   background-color: #FF2020;
-  box-shadow: 0 0 8px #FF2020;
+  box-shadow: 0 0 10px #FF2020;
 }
 
+/* Touch active / tap animation on Mobile & iPad */
+.cursor-ring.is-touching {
+  width: 58px;
+  height: 58px;
+  border-color: #FF2020;
+  background-color: rgba(255, 32, 32, 0.15);
+  box-shadow: 0 0 18px rgba(255, 32, 32, 0.45);
+}
+
+.cursor-dot.is-touching {
+  transform: scale(1.8);
+  background-color: #FF2020;
+  box-shadow: 0 0 12px #FF2020;
+}
+
+/* Hover on clickable elements (Desktop) */
 .cursor-ring.is-hovering {
   width: 60px;
   height: 60px;
@@ -109,8 +125,8 @@ body {
 }
 
 @keyframes rotateReticle {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* --- Language Selector Bar --- */
@@ -208,7 +224,7 @@ nav a:hover {
   font-weight: bold;
 }
 
-/* --- Mobile Navigation Drawer (Cleaned Alignment) --- */
+/* --- Mobile Navigation Drawer --- */
 .mobile-nav {
   position: fixed;
   inset: 0;
@@ -331,7 +347,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee (FIXED MOBILE BADGE & LOGO ALIGNMENT) --- */
+/* --- Brand Marquee --- */
 .brand-bar {
   width: 100%;
   margin: 0 auto clamp(40px, 5vw, 70px);
@@ -339,7 +355,6 @@ nav a:hover {
   text-align: center;
 }
 
-/* The badge is strictly fit-content and won't expand to full phone width */
 .brand-badge {
   display: inline-flex;
   align-items: center;
@@ -378,21 +393,22 @@ nav a:hover {
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   padding: 8px 0;
+  width: 100%;
 }
+
 .marquee-track {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  justify-content: space-around;
-  gap: 16px;
+  justify-content: flex-start;
+  gap: 20px;
+  padding-right: 20px;
   animation: scrollMarquee 26s linear infinite;
-  min-width: 100%;
 }
 .marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* Uniform, perfectly centered cards */
 .brand-card-item {
   display: flex;
   align-items: center;
@@ -412,7 +428,6 @@ nav a:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Perfect alignment for all logos, wide or tall */
 .brand-card-item img {
   max-height: 28px;
   max-width: 106px;
@@ -424,10 +439,9 @@ nav a:hover {
   margin: 0 auto;
 }
 
-/* Slightly upscale wide-aspect logos so they aren't miniature */
 .brand-card-item img[src*="m4marry"] {
-  max-height: 34px;
-  max-width: 115px;
+  max-height: 32px;
+  max-width: 110px;
 }
 .brand-card-item img[src*="amazon"] {
   max-height: 26px;
@@ -766,6 +780,10 @@ nav a:hover {
     padding: 5px 14px;
     letter-spacing: 1.5px;
   }
+  .marquee-track {
+    gap: 14px;
+    padding-right: 14px;
+  }
   .brand-card-item {
     width: 125px;
     height: 52px;
@@ -776,8 +794,8 @@ nav a:hover {
     max-width: 95px;
   }
   .brand-card-item img[src*="m4marry"] {
-    max-height: 30px;
-    max-width: 105px;
+    max-height: 28px;
+    max-width: 100px;
   }
 }
 </style>
@@ -1019,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Universal Video Reticle Cursor (Desktop, iPad, Android & iPhone) -->
+<!-- High Performance GPU-Accelerated Video Reticle Cursor (Mobile, Tablet & Desktop) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const dot = document.getElementById("cursorDot");
@@ -1027,74 +1045,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!dot || !ring) return;
 
-  let posX = window.innerWidth / 2;
-  let posY = window.innerHeight / 2;
-  let ringX = posX;
-  let ringY = posY;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let ringX = targetX;
+  let ringY = targetY;
   let scrollTimeout;
-  let touchTimeout;
+  let touchFadeTimeout;
+  let isTouching = false;
 
-  function showCursor() {
-    dot.classList.add("is-active");
-    ring.classList.add("is-active");
+  function setCursorActive(active) {
+    if (active) {
+      dot.classList.add("is-active");
+      ring.classList.add("is-active");
+    } else {
+      dot.classList.remove("is-active");
+      ring.classList.remove("is-active");
+      ring.classList.remove("is-touching");
+      dot.classList.remove("is-touching");
+    }
   }
 
-  function hideCursor() {
-    dot.classList.remove("is-active");
-    ring.classList.remove("is-active");
-  }
-
+  // Mouse Movement on Desktop (Mac / PC)
   window.addEventListener("mousemove", (e) => {
-    posX = e.clientX;
-    posY = e.clientY;
-    showCursor();
+    targetX = e.clientX;
+    targetY = e.clientY;
+    setCursorActive(true);
 
-    dot.style.left = `${posX}px`;
-    dot.style.top = `${posY}px`;
-  });
-
-  window.addEventListener("touchstart", (e) => {
-    if (e.touches.length > 0) {
-      posX = e.touches[0].clientX;
-      posY = e.touches[0].clientY;
-      ringX = posX;
-      ringY = posY;
-      showCursor();
-      dot.style.left = `${posX}px`;
-      dot.style.top = `${posY}px`;
-    }
+    // Hardware accelerated positioning
+    dot.style.transform = `translate3d(${targetX - 4}px, ${targetY - 4}px, 0)`;
   }, { passive: true });
 
-  window.addEventListener("touchmove", (e) => {
-    if (e.touches.length > 0) {
-      posX = e.touches[0].clientX;
-      posY = e.touches[0].clientY;
-      showCursor();
-      dot.style.left = `${posX}px`;
-      dot.style.top = `${posY}px`;
+  // Touch Interactions for Phones, Tablets, and iPad
+  function handleTouch(e) {
+    if (e.touches && e.touches.length > 0) {
+      targetX = e.touches[0].clientX;
+      targetY = e.touches[0].clientY;
+      ringX = targetX;
+      ringY = targetY;
+      isTouching = true;
+
+      setCursorActive(true);
+      ring.classList.add("is-touching");
+      dot.classList.add("is-touching");
+
+      dot.style.transform = `translate3d(${targetX - 4}px, ${targetY - 4}px, 0)`;
+      ring.style.transform = `translate3d(${targetX - 29}px, ${targetY - 29}px, 0)`;
+
+      clearTimeout(touchFadeTimeout);
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener("touchstart", handleTouch, { passive: true });
+  window.addEventListener("touchmove", handleTouch, { passive: true });
 
   window.addEventListener("touchend", () => {
-    clearTimeout(touchTimeout);
-    touchTimeout = setTimeout(() => {
-      hideCursor();
-    }, 1200);
-  });
+    isTouching = false;
+    ring.classList.remove("is-touching");
+    dot.classList.remove("is-touching");
 
-  function animateRing() {
-    ringX += (posX - ringX) * 0.18;
-    ringY += (posY - ringY) * 0.18;
+    clearTimeout(touchFadeTimeout);
+    touchFadeTimeout = setTimeout(() => {
+      setCursorActive(false);
+    }, 600);
+  }, { passive: true });
 
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
+  // Ultra-Smooth 60FPS Lerp Loop using Translate3d
+  function renderFrame() {
+    if (!isTouching) {
+      ringX += (targetX - ringX) * 0.22;
+      ringY += (targetY - ringY) * 0.22;
+      ring.style.transform = `translate3d(${ringX - 18}px, ${ringY - 18}px, 0)`;
+    }
 
-    requestAnimationFrame(animateRing);
+    requestAnimationFrame(renderFrame);
   }
-  animateRing();
+  renderFrame();
 
+  // Scroll Reticle: Rotates like a viewfinder camera shutter on scroll across all devices
   window.addEventListener("scroll", () => {
-    showCursor();
+    setCursorActive(true);
     ring.classList.add("is-scrolling");
     dot.classList.add("is-scrolling");
 
@@ -1102,15 +1131,17 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTimeout = setTimeout(() => {
       ring.classList.remove("is-scrolling");
       dot.classList.remove("is-scrolling");
-      
-      if (window.matchMedia("(hover: none)").matches) {
-        hideCursor();
+
+      // Auto-hide when scrolling stops on touch screens
+      if (!isTouching && window.matchMedia("(hover: none)").matches) {
+        setCursorActive(false);
       }
-    }, 250);
+    }, 220);
   }, { passive: true });
 
-  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
-  interactiveTargets.forEach((el) => {
+  // Hover magnification for clickable elements on desktop
+  const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  targets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
     el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
   });
