@@ -31,7 +31,7 @@ body {
 }
 
 /* ========================================================
-   UNIVERSAL RETICLE CURSOR (DESKTOP, MAC, IPAD, PHONES)
+   CUSTOM VIDEO-AGENCY RETICLE CURSOR
    ======================================================== */
 @media (hover: hover) and (pointer: fine) {
   body {
@@ -42,70 +42,68 @@ body {
   }
 }
 
-.universal-cursor-dot {
+.cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   background-color: #FF2020;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
+  transform: translate3d(-50%, -50%, 0);
   opacity: 0;
   will-change: transform, opacity;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.25s ease;
 }
 
-.universal-cursor-ring {
+.cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(255, 32, 32, 0.65);
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 32, 32, 0.7);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
+  transform: translate3d(-50%, -50%, 0);
   opacity: 0;
   will-change: transform, width, height, opacity, border-color;
-  transform: translate3d(-50%, -50%, 0);
-  transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.2s ease,
-              background-color 0.2s ease;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Active State */
-.universal-cursor-dot.is-active,
-.universal-cursor-ring.is-active {
+.cursor-dot.is-active,
+.cursor-ring.is-active {
   opacity: 1;
 }
 
-/* Scrolling Reticle across all devices */
-.universal-cursor-ring.is-scrolling {
+/* Viewfinder Shutter rotation on scroll */
+.cursor-ring.is-scrolling {
   width: 48px;
   height: 48px;
   border-color: #FF2020;
   border-style: dashed;
   animation: rotateReticle 3.5s linear infinite;
-  box-shadow: 0 0 14px rgba(255, 32, 32, 0.3);
+  box-shadow: 0 0 16px rgba(255, 32, 32, 0.35);
 }
 
-.universal-cursor-dot.is-scrolling {
+.cursor-dot.is-scrolling {
   transform: translate3d(-50%, -50%, 0) scale(1.4);
   box-shadow: 0 0 8px #FF2020;
 }
 
-/* Hovering on Desktop & Pressing on Touch Devices */
-.universal-cursor-ring.is-hovering,
-.universal-cursor-ring.is-pressed {
+/* Touch Down / Desktop Hover State */
+.cursor-ring.is-hovering,
+.cursor-ring.is-pressed {
   width: 54px;
   height: 54px;
   background-color: rgba(255, 32, 32, 0.12);
@@ -113,8 +111,8 @@ body {
   border-style: solid;
 }
 
-.universal-cursor-dot.is-pressed {
-  transform: translate3d(-50%, -50%, 0) scale(1.6);
+.cursor-dot.is-pressed {
+  transform: translate3d(-50%, -50%, 0) scale(1.5);
 }
 
 @keyframes rotateReticle {
@@ -340,7 +338,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee (Even spacing on both loops) --- */
+/* --- Brand Marquee --- */
 .brand-bar {
   width: 100%;
   margin: 0 auto clamp(40px, 5vw, 70px);
@@ -795,9 +793,9 @@ nav a:hover {
 </head>
 <body>
 
-<!-- Universal Reticle Cursor Elements -->
-<div class="universal-cursor-dot" id="cursorDot"></div>
-<div class="universal-cursor-ring" id="cursorRing"></div>
+<!-- Custom Video Reticle Cursor Elements -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- Language Switcher Bar -->
 <div class="lang-bar">
@@ -1030,7 +1028,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Universal Natural Responsive Cursor Animation (All Devices) -->
+<!-- Smooth Universal Reticle Cursor (Fluid Mobile/Tablet Touch Tracking) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const dot = document.getElementById("cursorDot");
@@ -1038,21 +1036,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!dot || !ring) return;
 
-  let posX = window.innerWidth / 2;
-  let posY = window.innerHeight / 2;
-  let ringX = posX;
-  let ringY = posY;
-  let isPointerDown = false;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let dotX = targetX;
+  let dotY = targetY;
+  let ringX = targetX;
+  let ringY = targetY;
+
   let isVisible = false;
   let scrollTimeout = null;
-  let touchTimeout = null;
+  let touchFadeTimeout = null;
+  let isTouching = false;
 
-  function setVisibility(visible) {
-    if (visible && !isVisible) {
+  function showCursor() {
+    if (!isVisible) {
       dot.classList.add("is-active");
       ring.classList.add("is-active");
       isVisible = true;
-    } else if (!visible && isVisible) {
+    }
+  }
+
+  function hideCursor() {
+    if (isVisible) {
       dot.classList.remove("is-active");
       ring.classList.remove("is-active");
       ring.classList.remove("is-scrolling");
@@ -1062,74 +1067,71 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Pointer Movement: Mouse, Trackpad, Finger, or Apple Pencil
-  window.addEventListener("pointermove", (e) => {
-    posX = e.clientX;
-    posY = e.clientY;
-    setVisibility(true);
-
-    // Direct hardware-accelerated snap for the center dot
-    dot.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
-
-    // Touch auto-fade when finger is lifted and idle
-    if (e.pointerType === "touch") {
-      clearTimeout(touchTimeout);
-      touchTimeout = setTimeout(() => {
-        if (!isPointerDown) setVisibility(false);
-      }, 1000);
-    }
+  // Mouse move on Mac / PC
+  window.addEventListener("mousemove", (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    showCursor();
   }, { passive: true });
-
-  window.addEventListener("pointerdown", (e) => {
-    posX = e.clientX;
-    posY = e.clientY;
-    isPointerDown = true;
-    setVisibility(true);
-
-    ring.classList.add("is-pressed");
-    dot.classList.add("is-pressed");
-    dot.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
-  }, { passive: true });
-
-  window.addEventListener("pointerup", (e) => {
-    isPointerDown = false;
-    ring.classList.remove("is-pressed");
-    dot.classList.remove("is-pressed");
-
-    if (e.pointerType === "touch") {
-      clearTimeout(touchTimeout);
-      touchTimeout = setTimeout(() => {
-        setVisibility(false);
-      }, 700);
-    }
-  }, { passive: true });
-
-  window.addEventListener("pointercancel", () => {
-    isPointerDown = false;
-    ring.classList.remove("is-pressed");
-    dot.classList.remove("is-pressed");
-    setVisibility(false);
-  });
 
   window.addEventListener("mouseleave", () => {
-    setVisibility(false);
+    hideCursor();
   });
 
-  // Natural Smooth Follow Loop (60-120Hz compatible on ProMotion Displays)
-  function renderLoop() {
+  // Touch Tracking for Phone, iPad, & Tablets
+  function handleTouch(e) {
+    if (e.touches && e.touches.length > 0) {
+      targetX = e.touches[0].clientX;
+      targetY = e.touches[0].clientY;
+      isTouching = true;
+
+      showCursor();
+      ring.classList.add("is-pressed");
+      dot.classList.add("is-pressed");
+
+      clearTimeout(touchFadeTimeout);
+    }
+  }
+
+  window.addEventListener("touchstart", handleTouch, { passive: true });
+  window.addEventListener("touchmove", handleTouch, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    isTouching = false;
+    ring.classList.remove("is-pressed");
+    dot.classList.remove("is-pressed");
+
+    clearTimeout(touchFadeTimeout);
+    touchFadeTimeout = setTimeout(() => {
+      hideCursor();
+    }, 900);
+  }, { passive: true });
+
+  window.addEventListener("touchcancel", () => {
+    isTouching = false;
+    hideCursor();
+  });
+
+  // Continuous 60fps / 120fps Smooth Physics Follow Loop
+  function animate() {
     if (isVisible) {
-      // Natural spring easing
-      ringX += (posX - ringX) * 0.22;
-      ringY += (posY - ringY) * 0.22;
+      // Dot moves swiftly to current point (touch or mouse)
+      dotX += (targetX - dotX) * 0.35;
+      dotY += (targetY - dotY) * 0.35;
+      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+
+      // Ring glides smoothly behind with soft easing
+      ringX += (targetX - ringX) * 0.18;
+      ringY += (targetY - ringY) * 0.18;
       ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
     }
-    requestAnimationFrame(renderLoop);
+    requestAnimationFrame(animate);
   }
-  requestAnimationFrame(renderLoop);
+  requestAnimationFrame(animate);
 
-  // Natural Scroll Reticle (Works smoothly across trackpads, wheels & finger swipe)
+  // Scroll Viewfinder Trigger
   window.addEventListener("scroll", () => {
-    setVisibility(true);
+    showCursor();
     ring.classList.add("is-scrolling");
     dot.classList.add("is-scrolling");
 
@@ -1138,27 +1140,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ring.classList.remove("is-scrolling");
       dot.classList.remove("is-scrolling");
 
-      // Fade out on touch devices if finger is not touching the screen
-      if (!isPointerDown && window.matchMedia("(hover: none)").matches) {
-        clearTimeout(touchTimeout);
-        touchTimeout = setTimeout(() => setVisibility(false), 400);
+      if (!isTouching && window.matchMedia("(hover: none)").matches) {
+        clearTimeout(touchFadeTimeout);
+        touchFadeTimeout = setTimeout(hideCursor, 500);
       }
     }, 180);
   }, { passive: true });
 
-  // Interactive Hover for links, buttons & clickable cards
-  const interactiveElements = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
-  interactiveElements.forEach((el) => {
-    el.addEventListener("pointerenter", (e) => {
-      if (e.pointerType !== "touch") {
-        ring.classList.add("is-hovering");
-      }
-    });
-    el.addEventListener("pointerleave", (e) => {
-      if (e.pointerType !== "touch") {
-        ring.classList.remove("is-hovering");
-      }
-    });
+  // Hover effect on desktop
+  const targets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  targets.forEach((el) => {
+    el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
+    el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
   });
 });
 </script>
