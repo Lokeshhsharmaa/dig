@@ -283,8 +283,7 @@ nav a:hover {
   overflow: visible;
   transition: transform 0.3s ease;
 }
-.hero-title:hover,
-.hero-title.is-scroll-active {
+.hero-title:hover {
   transform: scale(1.01);
 }
 .hero-content {
@@ -305,8 +304,7 @@ nav a:hover {
   color: #111;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
-.hero-content:hover .hero-symbol,
-.hero-content.is-scroll-active .hero-symbol {
+.hero-content:hover .hero-symbol {
   transform: scale(1.1) rotate(90deg);
   background-color: #FF2020;
   color: #ffffff;
@@ -318,8 +316,7 @@ nav a:hover {
   max-width: 650px;
   transition: color 0.3s ease;
 }
-.hero-text:hover,
-.hero-text.is-scroll-active {
+.hero-text:hover {
   color: #ffffff;
 }
 
@@ -342,8 +339,7 @@ nav a:hover {
   max-width: fit-content;
   transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
-.btn-pill:hover,
-.btn-pill.is-scroll-active {
+.btn-pill:hover {
   transform: translateY(-2px);
   background-color: #333333;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
@@ -352,8 +348,7 @@ nav a:hover {
   background-color: #ffffff;
   color: #111111;
 }
-.btn-hero:hover,
-.btn-hero.is-scroll-active {
+.btn-hero:hover {
   background-color: #f0f0f0;
 }
 
@@ -457,7 +452,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   THEMATIC TEXT POP & HIGHLIGHT (HOVER & MOBILE SCROLL)
+   HEADINGS: ONE-TIME HIGHLIGHT THEN BACK TO NORMAL BLACK
    ======================================================== */
 .section-title-wix {
   font-family: 'Syne', sans-serif;
@@ -470,24 +465,33 @@ nav a:hover {
   color: #111111;
   word-break: normal;
   overflow: visible;
-  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
 }
-.section-title-wix:hover,
-.section-title-wix.is-scroll-active {
-  color: #FF2020;
-  transform: translateX(6px);
+
+/* Animation that pulses red ONCE then settles permanently to black */
+@keyframes highlightOnce {
+  0% {
+    color: #111111;
+    transform: translateX(0);
+  }
+  35% {
+    color: #FF2020;
+    transform: translateX(6px);
+  }
+  100% {
+    color: #111111;
+    transform: translateX(0);
+  }
+}
+
+.section-title-wix.highlight-pulse {
+  animation: highlightOnce 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .section-subtitle-wix {
   font-size: 16px;
   color: #555555;
   margin-bottom: clamp(35px, 5vw, 55px);
-  transition: color 0.3s ease;
-}
-.section-subtitle-wix:hover,
-.section-subtitle-wix.is-scroll-active {
-  color: #111111;
 }
 
 /* --- WHAT WE DO (Split Layout) --- */
@@ -512,10 +516,9 @@ nav a:hover {
   height: 9px;
   background-color: #FF2020;
   border-radius: 50%;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
-.wix-split-left:hover .wix-decorative-dots span,
-.wix-split-left.is-scroll-active .wix-decorative-dots span {
+.wix-split-left:hover .wix-decorative-dots span {
   transform: scale(1.3);
 }
 
@@ -526,14 +529,6 @@ nav a:hover {
   margin-bottom: 35px;
   font-weight: 500;
   padding: 10px 14px;
-  border-left: 3px solid transparent;
-  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
-}
-.wix-split-right p.lead:hover,
-.wix-split-right p.lead.is-scroll-active {
-  border-left-color: #FF2020;
-  background-color: rgba(255, 32, 32, 0.04);
-  transform: translateX(4px);
 }
 
 .wix-service-list {
@@ -559,7 +554,7 @@ nav a:hover {
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 8px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: color 0.3s ease;
 }
 .wix-service-item:hover h4,
 .wix-service-item.is-scroll-active h4 {
@@ -569,11 +564,6 @@ nav a:hover {
   font-size: 15px;
   color: #555;
   line-height: 1.5;
-  transition: color 0.3s ease;
-}
-.wix-service-item:hover p,
-.wix-service-item.is-scroll-active p {
-  color: #222;
 }
 
 /* --- OUR APPROACH (Capsule Cards) --- */
@@ -641,11 +631,6 @@ nav a:hover {
   font-size: 15px;
   color: #444444;
   line-height: 1.6;
-  transition: color 0.3s ease;
-}
-.wix-capsule-card:hover .wix-capsule-desc,
-.wix-capsule-card.is-scroll-active .wix-capsule-desc {
-  color: #111111;
 }
 
 .wix-capsule-dots {
@@ -682,7 +667,7 @@ nav a:hover {
   width: 100%;
 }
 .metrics .section-title-wix {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .metrics-subtitle {
   color: #aaaaaa;
@@ -743,24 +728,24 @@ nav a:hover {
   white-space: nowrap;
 }
 
-/* --- CONTACT SECTION & MATCHING COLOURED ACTION BUTTONS --- */
+/* --- CONTACT SECTION --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 6vw, 90px);
   align-items: start;
 }
-.contact-pitch {
+
+/* Strictly Clean & Black Subtitle */
+.contact-pitch-clean {
   font-size: 17px;
   font-weight: 700;
   margin: 15px 0 10px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  color: #111111 !important;
+  user-select: none;
+  pointer-events: none; /* Prevents unwanted highlight activation */
 }
-.contact-pitch:hover,
-.contact-pitch.is-scroll-active {
-  color: #FF2020;
-  transform: translateX(4px);
-}
+
 .form-group {
   margin-bottom: 22px;
 }
@@ -990,7 +975,7 @@ nav a:hover {
   <section class="section-wrapper" id="what-we-do">
     <div class="wix-split-section">
       <div class="wix-split-left reveal-item">
-        <h2 class="section-title-wix">What We Do</h2>
+        <h2 class="section-title-wix title-pulse-once">What We Do</h2>
         <div class="wix-decorative-dots">
           <span></span><span></span><span></span><span></span>
         </div>
@@ -1025,7 +1010,7 @@ nav a:hover {
   <!-- OUR APPROACH -->
   <section class="section-wrapper" id="approach">
     <div class="reveal-item">
-      <h2 class="section-title-wix">Our Approach</h2>
+      <h2 class="section-title-wix title-pulse-once">Our Approach</h2>
       <p class="section-subtitle-wix">Discover how we turn your requirements into high-performing content.</p>
     </div>
     <div class="wix-card-stack">
@@ -1099,8 +1084,9 @@ nav a:hover {
   <section class="section-wrapper" id="contact">
     <div class="contact-container reveal-item">
       <div>
-        <h2 class="section-title-wix">Let's Work Together</h2>
-        <p class="contact-pitch">Your Idea + Our Production = Content That Performs.</p>
+        <h2 class="section-title-wix title-pulse-once">Let's Work Together</h2>
+        <!-- Completely Normal Black Text (No Highlights) -->
+        <p class="contact-pitch-clean">Your Idea + Our Production = Content That Performs.</p>
         
         <!-- Direct Interactive Coloured Contact Channels -->
         <div class="social-channels">
@@ -1158,10 +1144,10 @@ nav a:hover {
   </section>
 </main>
 
-<!-- Scroll Reveal Animation & Mobile-Scroll Auto-Highlighter -->
+<!-- Scroll Animations & One-Time Heading Highlight Engine -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Initial Entrance Animations
+  // 1. Initial Entrance Fade-in
   const revealElements = document.querySelectorAll(".reveal-item");
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1175,12 +1161,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   revealElements.forEach((el) => observer.observe(el));
 
-  // 2. Active Scroll Animation for Mobile Phones & Tablets
-  // Automatically activates text pop/highlights and cards as you scroll across them
+  // 2. Headings: Highlight ONCE only, then automatically revert to normal black
+  const pulseHeadings = document.querySelectorAll(".title-pulse-once");
+  const headingObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("highlight-pulse");
+        // Disconnect after running once so it never triggers again
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.5,
+    rootMargin: "0px 0px -15% 0px"
+  });
+  pulseHeadings.forEach((h) => headingObserver.observe(h));
+
+  // 3. Service items and interactive cards (dynamic active viewport tracking on mobile)
   const isTouchDevice = window.matchMedia("(hover: none)").matches;
-  const interactiveTargets = document.querySelectorAll(
-    ".wix-service-item, .wix-capsule-card, .metric-box-card, .section-title-wix, .lead, .contact-pitch"
-  );
+  const cardsAndItems = document.querySelectorAll(".wix-service-item, .wix-capsule-card, .metric-box-card");
 
   const scrollActiveObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1192,10 +1191,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, {
     threshold: isTouchDevice ? 0.45 : 0.6,
-    rootMargin: "-10% 0px -20% 0px" // Targets the comfortable focal reading area
+    rootMargin: "-10% 0px -20% 0px"
   });
-
-  interactiveTargets.forEach((target) => scrollActiveObserver.observe(target));
+  cardsAndItems.forEach((target) => scrollActiveObserver.observe(target));
 });
 </script>
 
@@ -1286,13 +1284,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   animateCursor();
 
-  // Scroll Reticle Trigger (Works fluidly when scrolling on touch screens & laptops)
+  // Scroll Reticle Trigger
   window.addEventListener("scroll", () => {
     showCursor();
     ring.classList.add("is-scrolling");
     dot.classList.add("is-scrolling");
 
-    // On mobile screens, automatically float the cursor reticle near the active center while scrolling
     if (window.matchMedia("(hover: none)").matches) {
       targetX = window.innerWidth / 2;
       targetY = window.innerHeight / 2.3;
@@ -1310,8 +1307,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 250);
   }, { passive: true });
 
-  // Interactive Hover Magnifier for links, buttons & text headers
-  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn, .wix-service-item, .section-title-wix, .hero-title");
+  // Interactive Hover Magnifier for links, buttons & text elements
+  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn, .wix-service-item, .hero-title");
   interactiveTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
     el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
