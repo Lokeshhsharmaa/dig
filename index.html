@@ -189,7 +189,6 @@ nav {
   display: flex;
   align-items: center;
 }
-/* Laptop Menu: Now using the exact same 'Syne' font as Mobile */
 nav a {
   font-family: 'Syne', sans-serif;
   color: #111111;
@@ -649,7 +648,7 @@ nav a:hover {
   white-space: nowrap;
 }
 
-/* --- CONTACT SECTION --- */
+/* --- CONTACT SECTION & SOCIAL CHANNELS --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -689,6 +688,52 @@ nav a:hover {
 }
 .contact-link:hover {
   color: #FF2020;
+}
+
+/* WhatsApp & Instagram Direct Channels */
+.social-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.channel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  width: fit-content;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+}
+.channel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+.channel-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.channel-whatsapp {
+  background-color: #25D366;
+  color: #ffffff;
+  border-color: #25D366;
+}
+.channel-whatsapp:hover {
+  background-color: #20bd5a;
+}
+.channel-instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+  border: none;
+}
+.channel-instagram:hover {
+  opacity: 0.95;
 }
 
 /* --- Scroll Reveal Animations --- */
@@ -955,11 +1000,30 @@ nav a:hover {
         <h2 class="section-title-wix">Let's Work Together</h2>
         <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
         <div class="footer-info">
-          <p style="color: #666; margin-bottom: 2px;">Phone / WhatsApp</p>
+          <p style="color: #666; margin-bottom: 2px;">Phone</p>
           <a href="tel:+917904606332" class="contact-link">+91 79046 06332</a>
           <br><br>
           <p style="color: #666; margin-bottom: 2px;">Email</p>
           <a href="mailto:hellohandles@gmail.com" class="contact-link">hellohandles@gmail.com</a>
+        </div>
+
+        <!-- Direct WhatsApp & Instagram Buttons -->
+        <div class="social-channels">
+          <!-- WhatsApp Link -->
+          <a href="https://wa.me/917904606332?text=Hello%20Handles%20Team,%20I'm%20interested%20in%20starting%20a%20video%20project." target="_blank" rel="noopener noreferrer" class="channel-btn channel-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.54 1.83.827 2.796.827 3.182 0 5.768-2.587 5.769-5.767.001-3.181-2.584-5.766-5.769-5.766zm9.969 5.766c-.002 5.519-4.49 9.998-10.009 9.998-1.724 0-3.359-.444-4.79-1.222l-5.201 1.364 1.389-5.074c-.878-1.493-1.389-3.238-1.389-5.066.002-5.519 4.49-9.998 10.009-9.998 5.519 0 9.991 4.479 9.991 9.998z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+
+          <!-- Instagram Link -->
+          <a href="https://instagram.com/handles.agency" target="_blank" rel="noopener noreferrer" class="channel-btn channel-instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Follow on Instagram
+          </a>
         </div>
       </div>
       <div>
@@ -1108,7 +1172,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 
   // Interactive Hover Magnifier for links and buttons
-  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card");
+  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn");
   interactiveTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
     el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
