@@ -265,17 +265,21 @@ nav a:hover {
   margin-bottom: 20px;
   font-weight: 700;
 }
+/* Fixed descender cut-off on 'g' and 'y' */
 .hero-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.6rem, 7vw, 5.5rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.15;
   letter-spacing: -1.5px;
   margin-bottom: 35px;
+  padding-bottom: 0.12em;
   text-transform: capitalize;
   background: linear-gradient(45deg, #FF2020, #ff8800, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: block;
+  overflow: visible;
 }
 .hero-content {
   display: grid;
@@ -431,15 +435,18 @@ nav a:hover {
   padding: clamp(45px, 6vw, 85px) 4vw;
 }
 
+/* Fixed line-height and padding so 'g' is never cut off */
 .section-title-wix {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.2rem, 3.8vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -1px;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 12px;
+  padding-bottom: 0.1em;
   color: #111111;
   word-break: normal;
+  overflow: visible;
 }
 .section-subtitle-wix {
   font-size: 16px;
@@ -648,7 +655,7 @@ nav a:hover {
   white-space: nowrap;
 }
 
-/* --- CONTACT SECTION & INTERACTIVE BUTTONS --- */
+/* --- CONTACT SECTION & MATCHING COLOURED ACTION BUTTONS --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -675,65 +682,59 @@ nav a:hover {
   border-color: #FF2020;
 }
 
-/* Contact Action Buttons (Phone, Email, WhatsApp, Instagram) */
+/* Cohesive Coloured Buttons for Phone, Email, WhatsApp, and Instagram */
 .social-channels {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   margin-top: 25px;
 }
 .channel-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 14px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 700;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   width: fit-content;
-  border: 1.5px solid rgba(17, 17, 17, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 .channel-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  filter: brightness(1.05);
 }
 .channel-btn svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
+
+/* Phone: Vibrant Blue Gradient */
 .channel-phone {
-  background-color: #ffffff;
-  color: #111111;
-}
-.channel-phone:hover {
-  border-color: #111111;
-}
-.channel-email {
-  background-color: #ffffff;
-  color: #111111;
-}
-.channel-email:hover {
-  border-color: #FF2020;
-  color: #FF2020;
-}
-.channel-whatsapp {
-  background-color: #25D366;
+  background: linear-gradient(135deg, #007AFF 0%, #0051D4 100%);
   color: #ffffff;
-  border-color: #25D366;
 }
-.channel-whatsapp:hover {
-  background-color: #20bd5a;
+
+/* Email: Handles Red / Coral Gradient */
+.channel-email {
+  background: linear-gradient(135deg, #FF3B30 0%, #D61A1A 100%);
+  color: #ffffff;
 }
+
+/* WhatsApp: Official Green Gradient */
+.channel-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+}
+
+/* Instagram: Official Radial/Linear Mesh Gradient */
 .channel-instagram {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff;
-  border: none;
-}
-.channel-instagram:hover {
-  opacity: 0.95;
 }
 
 /* --- Scroll Reveal Animations --- */
@@ -1000,9 +1001,9 @@ nav a:hover {
         <h2 class="section-title-wix">Let's Work Together</h2>
         <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
         
-        <!-- Direct Interactive Contact Channels -->
+        <!-- Direct Interactive Coloured Contact Channels -->
         <div class="social-channels">
-          <!-- Phone Button -->
+          <!-- Phone Button (Vibrant Blue) -->
           <a href="tel:+917904606332" class="channel-btn channel-phone">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -1010,7 +1011,7 @@ nav a:hover {
             +91 79046 06332
           </a>
 
-          <!-- Email Button -->
+          <!-- Email Button (Agency Red) -->
           <a href="mailto:hellohandles@gmail.com" class="channel-btn channel-email">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -1018,7 +1019,7 @@ nav a:hover {
             hellohandles@gmail.com
           </a>
 
-          <!-- WhatsApp Link -->
+          <!-- WhatsApp Button (Official Green) -->
           <a href="https://wa.me/917904606332?text=Hello%20Handles%20Team,%20I'm%20interested%20in%20starting%20a%20video%20project." target="_blank" rel="noopener noreferrer" class="channel-btn channel-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.54 1.83.827 2.796.827 3.182 0 5.768-2.587 5.769-5.767.001-3.181-2.584-5.766-5.769-5.766zm9.969 5.766c-.002 5.519-4.49 9.998-10.009 9.998-1.724 0-3.359-.444-4.79-1.222l-5.201 1.364 1.389-5.074c-.878-1.493-1.389-3.238-1.389-5.066.002-5.519 4.49-9.998 10.009-9.998 5.519 0 9.991 4.479 9.991 9.998z"/>
@@ -1026,7 +1027,7 @@ nav a:hover {
             Chat on WhatsApp
           </a>
 
-          <!-- Instagram Link -->
+          <!-- Instagram Button (Gradient Mesh) -->
           <a href="https://instagram.com/handles.agency" target="_blank" rel="noopener noreferrer" class="channel-btn channel-instagram">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -1083,56 +1084,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!dot || !ring) return;
 
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight / 2;
-  let dotX = targetX;
-  let dotY = targetY;
-  let ringX = targetX;
-  let ringY = targetY;
-
-  let isVisible = false;
+  let posX = window.innerWidth / 2;
+  let posY = window.innerHeight / 2;
+  let ringX = posX;
+  let ringY = posY;
   let scrollTimeout;
   let touchTimeout;
 
   function showCursor() {
-    if (!isVisible) {
-      dot.classList.add("is-active");
-      ring.classList.add("is-active");
-      isVisible = true;
-    }
+    dot.classList.add("is-active");
+    ring.classList.add("is-active");
   }
 
   function hideCursor() {
-    if (isVisible) {
-      dot.classList.remove("is-active");
-      ring.classList.remove("is-active");
-      isVisible = false;
-    }
+    dot.classList.remove("is-active");
+    ring.classList.remove("is-active");
   }
 
-  // Track Mouse on Desktop
   window.addEventListener("mousemove", (e) => {
-    targetX = e.clientX;
-    targetY = e.clientY;
+    posX = e.clientX;
+    posY = e.clientY;
     showCursor();
-  }, { passive: true });
 
-  window.addEventListener("mouseleave", () => {
-    hideCursor();
+    dot.style.left = `${posX}px`;
+    dot.style.top = `${posY}px`;
   });
 
-  // Touch Tracking for Phone, iPad & Tablets (Smooth Glide to Touch)
-  function handleTouch(e) {
-    if (e.touches && e.touches.length > 0) {
-      targetX = e.touches[0].clientX;
-      targetY = e.touches[0].clientY;
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches.length > 0) {
+      posX = e.touches[0].clientX;
+      posY = e.touches[0].clientY;
+      ringX = posX;
+      ringY = posY;
       showCursor();
-      clearTimeout(touchTimeout);
+      dot.style.left = `${posX}px`;
+      dot.style.top = `${posY}px`;
     }
-  }
+  }, { passive: true });
 
-  window.addEventListener("touchstart", handleTouch, { passive: true });
-  window.addEventListener("touchmove", handleTouch, { passive: true });
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      posX = e.touches[0].clientX;
+      posY = e.touches[0].clientY;
+      showCursor();
+      dot.style.left = `${posX}px`;
+      dot.style.top = `${posY}px`;
+    }
+  }, { passive: true });
 
   window.addEventListener("touchend", () => {
     clearTimeout(touchTimeout);
@@ -1141,28 +1139,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1200);
   });
 
-  window.addEventListener("touchcancel", () => {
-    hideCursor();
-  });
+  function animateRing() {
+    ringX += (posX - ringX) * 0.18;
+    ringY += (posY - ringY) * 0.18;
 
-  // Smooth Natural Lerp Loop
-  function animateCursor() {
-    if (isVisible) {
-      dotX += (targetX - dotX) * 0.35;
-      dotY += (targetY - dotY) * 0.35;
-      dot.style.left = `${dotX}px`;
-      dot.style.top = `${dotY}px`;
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
 
-      ringX += (targetX - ringX) * 0.18;
-      ringY += (targetY - ringY) * 0.18;
-      ring.style.left = `${ringX}px`;
-      ring.style.top = `${ringY}px`;
-    }
-    requestAnimationFrame(animateCursor);
+    requestAnimationFrame(animateRing);
   }
-  animateCursor();
+  animateRing();
 
-  // Scroll Reticle Trigger
   window.addEventListener("scroll", () => {
     showCursor();
     ring.classList.add("is-scrolling");
@@ -1174,13 +1161,11 @@ document.addEventListener("DOMContentLoaded", () => {
       dot.classList.remove("is-scrolling");
       
       if (window.matchMedia("(hover: none)").matches) {
-        clearTimeout(touchTimeout);
-        touchTimeout = setTimeout(hideCursor, 600);
+        hideCursor();
       }
     }, 250);
   }, { passive: true });
 
-  // Interactive Hover Magnifier for links and buttons
   const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn");
   interactiveTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
