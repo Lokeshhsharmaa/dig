@@ -648,7 +648,7 @@ nav a:hover {
   white-space: nowrap;
 }
 
-/* --- CONTACT SECTION & SOCIAL CHANNELS --- */
+/* --- CONTACT SECTION & INTERACTIVE BUTTONS --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -674,28 +674,13 @@ nav a:hover {
   outline: none;
   border-color: #FF2020;
 }
-.footer-info {
-  font-size: 15px;
-  line-height: 1.8;
-  margin-top: 25px;
-}
-.contact-link {
-  color: #111111;
-  text-decoration: none;
-  font-weight: 700;
-  display: inline-block;
-  transition: color 0.2s ease;
-}
-.contact-link:hover {
-  color: #FF2020;
-}
 
-/* WhatsApp & Instagram Direct Channels */
+/* Contact Action Buttons (Phone, Email, WhatsApp, Instagram) */
 .social-channels {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 25px;
 }
 .channel-btn {
   display: inline-flex;
@@ -708,7 +693,7 @@ nav a:hover {
   font-weight: 700;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   width: fit-content;
-  border: 1px solid rgba(17, 17, 17, 0.08);
+  border: 1.5px solid rgba(17, 17, 17, 0.12);
 }
 .channel-btn:hover {
   transform: translateY(-2px);
@@ -718,6 +703,21 @@ nav a:hover {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+.channel-phone {
+  background-color: #ffffff;
+  color: #111111;
+}
+.channel-phone:hover {
+  border-color: #111111;
+}
+.channel-email {
+  background-color: #ffffff;
+  color: #111111;
+}
+.channel-email:hover {
+  border-color: #FF2020;
+  color: #FF2020;
 }
 .channel-whatsapp {
   background-color: #25D366;
@@ -999,16 +999,25 @@ nav a:hover {
       <div>
         <h2 class="section-title-wix">Let's Work Together</h2>
         <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
-        <div class="footer-info">
-          <p style="color: #666; margin-bottom: 2px;">Phone</p>
-          <a href="tel:+917904606332" class="contact-link">+91 79046 06332</a>
-          <br><br>
-          <p style="color: #666; margin-bottom: 2px;">Email</p>
-          <a href="mailto:hellohandles@gmail.com" class="contact-link">hellohandles@gmail.com</a>
-        </div>
-
-        <!-- Direct WhatsApp & Instagram Buttons -->
+        
+        <!-- Direct Interactive Contact Channels -->
         <div class="social-channels">
+          <!-- Phone Button -->
+          <a href="tel:+917904606332" class="channel-btn channel-phone">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            +91 79046 06332
+          </a>
+
+          <!-- Email Button -->
+          <a href="mailto:hellohandles@gmail.com" class="channel-btn channel-email">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            hellohandles@gmail.com
+          </a>
+
           <!-- WhatsApp Link -->
           <a href="https://wa.me/917904606332?text=Hello%20Handles%20Team,%20I'm%20interested%20in%20starting%20a%20video%20project." target="_blank" rel="noopener noreferrer" class="channel-btn channel-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor">
