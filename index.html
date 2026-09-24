@@ -197,10 +197,12 @@ nav a {
   font-size: 15px;
   font-weight: 800;
   letter-spacing: -0.3px;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 nav a:hover {
   color: #FF2020;
+  transform: translateY(-2px);
 }
 .menu-btn {
   display: none;
@@ -265,7 +267,6 @@ nav a:hover {
   margin-bottom: 20px;
   font-weight: 700;
 }
-/* Fixed descender cut-off on 'g' and 'y' */
 .hero-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.6rem, 7vw, 5.5rem);
@@ -280,6 +281,10 @@ nav a:hover {
   -webkit-text-fill-color: transparent;
   display: block;
   overflow: visible;
+  transition: transform 0.3s ease;
+}
+.hero-title:hover {
+  transform: scale(1.01);
 }
 .hero-content {
   display: grid;
@@ -297,12 +302,22 @@ nav a:hover {
   justify-content: center;
   font-size: 16px;
   color: #111;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.hero-content:hover .hero-symbol {
+  transform: scale(1.1) rotate(90deg);
+  background-color: #FF2020;
+  color: #ffffff;
 }
 .hero-text {
   font-size: clamp(16px, 1.8vw, 18px);
   line-height: 1.6;
   color: #bbbbbb;
   max-width: 650px;
+  transition: color 0.3s ease;
+}
+.hero-text:hover {
+  color: #ffffff;
 }
 
 /* --- Buttons --- */
@@ -322,11 +337,12 @@ nav a:hover {
   text-decoration: none;
   width: auto;
   max-width: fit-content;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 .btn-pill:hover {
   transform: translateY(-2px);
   background-color: #333333;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 .btn-hero {
   background-color: #ffffff;
@@ -435,7 +451,9 @@ nav a:hover {
   padding: clamp(45px, 6vw, 85px) 4vw;
 }
 
-/* Fixed line-height and padding so 'g' is never cut off */
+/* ========================================================
+   THEMATIC TEXT POP & HIGHLIGHT ANIMATIONS
+   ======================================================== */
 .section-title-wix {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.2rem, 3.8vw, 3.5rem);
@@ -447,11 +465,22 @@ nav a:hover {
   color: #111111;
   word-break: normal;
   overflow: visible;
+  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
 }
+.section-title-wix:hover {
+  color: #FF2020;
+  transform: translateX(6px);
+}
+
 .section-subtitle-wix {
   font-size: 16px;
   color: #555555;
   margin-bottom: clamp(35px, 5vw, 55px);
+  transition: color 0.3s ease;
+}
+.section-subtitle-wix:hover {
+  color: #111111;
 }
 
 /* --- WHAT WE DO (Split Layout) --- */
@@ -476,14 +505,28 @@ nav a:hover {
   height: 9px;
   background-color: #FF2020;
   border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
+.wix-split-left:hover .wix-decorative-dots span {
+  transform: scale(1.3);
+}
+
 .wix-split-right p.lead {
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   line-height: 1.55;
   color: #111111;
   margin-bottom: 35px;
   font-weight: 500;
+  padding: 10px 14px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
+.wix-split-right p.lead:hover {
+  border-left-color: #FF2020;
+  background-color: rgba(255, 32, 32, 0.04);
+  transform: translateX(4px);
+}
+
 .wix-service-list {
   display: flex;
   flex-direction: column;
@@ -492,18 +535,33 @@ nav a:hover {
 }
 .wix-service-item {
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  padding-top: 18px;
+  padding: 18px 12px 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+.wix-service-item:hover {
+  background-color: rgba(255, 32, 32, 0.05);
+  transform: translateX(8px);
 }
 .wix-service-item h4 {
   font-family: 'Syne', sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   margin-bottom: 8px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.wix-service-item:hover h4 {
+  color: #FF2020;
 }
 .wix-service-item p {
   font-size: 15px;
   color: #555;
   line-height: 1.5;
+  transition: color 0.3s ease;
+}
+.wix-service-item:hover p {
+  color: #222;
 }
 
 /* --- OUR APPROACH (Capsule Cards) --- */
@@ -556,18 +614,24 @@ nav a:hover {
   font-size: 1.45rem;
   font-weight: 800;
   color: #111111;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .wix-capsule-card:hover .wix-capsule-title {
   color: #FF2020;
+  transform: translateX(4px);
 }
 
 .wix-capsule-desc {
   font-size: 15px;
   color: #444444;
   line-height: 1.6;
+  transition: color 0.3s ease;
 }
+.wix-capsule-card:hover .wix-capsule-desc {
+  color: #111111;
+}
+
 .wix-capsule-dots {
   display: grid;
   grid-template-columns: repeat(2, 6px);
@@ -630,11 +694,12 @@ nav a:hover {
   justify-content: center;
   align-items: flex-start;
   min-width: 0;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
 }
 .metric-box-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 32, 32, 0.4);
+  transform: translateY(-4px);
+  border-color: rgba(255, 32, 32, 0.5);
+  background: rgba(255, 255, 255, 0.07);
 }
 .metric-box-card h3 {
   font-family: 'Syne', sans-serif;
@@ -645,6 +710,10 @@ nav a:hover {
   line-height: 1;
   letter-spacing: -0.5px;
   white-space: nowrap;
+  transition: transform 0.25s ease;
+}
+.metric-box-card:hover h3 {
+  transform: scale(1.05);
 }
 .metric-box-card p {
   font-size: clamp(10px, 0.85vw, 12px);
@@ -662,6 +731,16 @@ nav a:hover {
   gap: clamp(40px, 6vw, 90px);
   align-items: start;
 }
+.contact-pitch {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 15px 0 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.contact-pitch:hover {
+  color: #FF2020;
+  transform: translateX(4px);
+}
 .form-group {
   margin-bottom: 22px;
 }
@@ -675,6 +754,7 @@ nav a:hover {
   font-size: 15px;
   font-family: inherit;
   border-radius: 0;
+  transition: border-color 0.3s ease;
 }
 .form-group input:focus, 
 .form-group textarea:focus {
@@ -731,7 +811,7 @@ nav a:hover {
   color: #ffffff;
 }
 
-/* Instagram: Official Radial/Linear Mesh Gradient */
+/* Instagram: Official Gradient */
 .channel-instagram {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff;
@@ -921,7 +1001,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- OUR APPROACH (SAME COLOR AS BACKGROUND) -->
+  <!-- OUR APPROACH -->
   <section class="section-wrapper" id="approach">
     <div class="reveal-item">
       <h2 class="section-title-wix">Our Approach</h2>
@@ -999,7 +1079,7 @@ nav a:hover {
     <div class="contact-container reveal-item">
       <div>
         <h2 class="section-title-wix">Let's Work Together</h2>
-        <p style="font-size: 17px; font-weight: 700; margin: 15px 0 10px;">Your Idea + Our Production = Content That Performs.</p>
+        <p class="contact-pitch">Your Idea + Our Production = Content That Performs.</p>
         
         <!-- Direct Interactive Coloured Contact Channels -->
         <div class="social-channels">
@@ -1084,53 +1164,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!dot || !ring) return;
 
-  let posX = window.innerWidth / 2;
-  let posY = window.innerHeight / 2;
-  let ringX = posX;
-  let ringY = posY;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let dotX = targetX;
+  let dotY = targetY;
+  let ringX = targetX;
+  let ringY = targetY;
+
+  let isVisible = false;
   let scrollTimeout;
   let touchTimeout;
 
   function showCursor() {
-    dot.classList.add("is-active");
-    ring.classList.add("is-active");
+    if (!isVisible) {
+      dot.classList.add("is-active");
+      ring.classList.add("is-active");
+      isVisible = true;
+    }
   }
 
   function hideCursor() {
-    dot.classList.remove("is-active");
-    ring.classList.remove("is-active");
+    if (isVisible) {
+      dot.classList.remove("is-active");
+      ring.classList.remove("is-active");
+      isVisible = false;
+    }
   }
 
+  // Track Mouse on Desktop
   window.addEventListener("mousemove", (e) => {
-    posX = e.clientX;
-    posY = e.clientY;
+    targetX = e.clientX;
+    targetY = e.clientY;
     showCursor();
+  }, { passive: true });
 
-    dot.style.left = `${posX}px`;
-    dot.style.top = `${posY}px`;
+  window.addEventListener("mouseleave", () => {
+    hideCursor();
   });
 
-  window.addEventListener("touchstart", (e) => {
-    if (e.touches.length > 0) {
-      posX = e.touches[0].clientX;
-      posY = e.touches[0].clientY;
-      ringX = posX;
-      ringY = posY;
+  // Touch Tracking for Phone, iPad & Tablets (Smooth Glide to Touch)
+  function handleTouch(e) {
+    if (e.touches && e.touches.length > 0) {
+      targetX = e.touches[0].clientX;
+      targetY = e.touches[0].clientY;
       showCursor();
-      dot.style.left = `${posX}px`;
-      dot.style.top = `${posY}px`;
+      clearTimeout(touchTimeout);
     }
-  }, { passive: true });
+  }
 
-  window.addEventListener("touchmove", (e) => {
-    if (e.touches.length > 0) {
-      posX = e.touches[0].clientX;
-      posY = e.touches[0].clientY;
-      showCursor();
-      dot.style.left = `${posX}px`;
-      dot.style.top = `${posY}px`;
-    }
-  }, { passive: true });
+  window.addEventListener("touchstart", handleTouch, { passive: true });
+  window.addEventListener("touchmove", handleTouch, { passive: true });
 
   window.addEventListener("touchend", () => {
     clearTimeout(touchTimeout);
@@ -1139,17 +1222,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1200);
   });
 
-  function animateRing() {
-    ringX += (posX - ringX) * 0.18;
-    ringY += (posY - ringY) * 0.18;
+  window.addEventListener("touchcancel", () => {
+    hideCursor();
+  });
 
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
+  // Smooth Natural Lerp Loop
+  function animateCursor() {
+    if (isVisible) {
+      dotX += (targetX - dotX) * 0.35;
+      dotY += (targetY - dotY) * 0.35;
+      dot.style.left = `${dotX}px`;
+      dot.style.top = `${dotY}px`;
 
-    requestAnimationFrame(animateRing);
+      ringX += (targetX - ringX) * 0.18;
+      ringY += (targetY - ringY) * 0.18;
+      ring.style.left = `${ringX}px`;
+      ring.style.top = `${ringY}px`;
+    }
+    requestAnimationFrame(animateCursor);
   }
-  animateRing();
+  animateCursor();
 
+  // Scroll Reticle Trigger
   window.addEventListener("scroll", () => {
     showCursor();
     ring.classList.add("is-scrolling");
@@ -1161,12 +1255,14 @@ document.addEventListener("DOMContentLoaded", () => {
       dot.classList.remove("is-scrolling");
       
       if (window.matchMedia("(hover: none)").matches) {
-        hideCursor();
+        clearTimeout(touchTimeout);
+        touchTimeout = setTimeout(hideCursor, 600);
       }
     }, 250);
   }, { passive: true });
 
-  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn");
+  // Interactive Hover Magnifier for links, buttons & text headers
+  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn, .wix-service-item, .section-title-wix, .hero-title");
   interactiveTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
     el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
