@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!-- Phone Zoom Lock: Prevents layout disruption on mobile touch -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Handles | Creative Film & Visual Storytelling</title>
+<title>Handles | Creative Video Production Agency</title>
 
 <!-- Fonts matching template -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  touch-action: pan-x pan-y; /* Locks pinch-zoom while keeping normal scroll smooth */
+  touch-action: pan-x pan-y;
 }
 body {
   background-color: #ffffcc;
@@ -195,7 +195,6 @@ nav {
   display: flex;
   align-items: center;
 }
-/* Replaced dense Syne with clear, legible Plus Jakarta Sans */
 nav a {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: #111111;
@@ -277,7 +276,7 @@ nav a:hover {
 }
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.5rem, 6.5vw, 5.2rem);
+  font-size: clamp(2.3rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -1.5px;
@@ -458,7 +457,6 @@ nav a:hover {
   margin-bottom: 24px;
 }
 
-/* Clean Readable Style for What We Offer Sub-heading */
 .offer-subheading {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.25rem;
@@ -468,7 +466,7 @@ nav a:hover {
   color: #111111;
 }
 
-/* Service Grid (What We Do items) */
+/* Service Grid */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -494,7 +492,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   WHY HANDLES (PREVIOUSLY OUR DIFFERENCE)
+   WHY HANDLES
    ======================================================== */
 .wix-card-stack {
   display: flex;
@@ -581,7 +579,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   FOUNDERS SECTION
+   FOUNDERS SECTION (PRECISE FRAMING FOR ALL THREE)
    ======================================================== */
 .founders-grid {
   display: grid;
@@ -612,17 +610,29 @@ nav a:hover {
   position: relative;
 }
 
-/* Original Framing for Hari & Animesh */
+/* Default styling */
 .founder-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
   transition: transform 0.5s ease;
 }
 
-/* Specific framing applied ONLY to Caroline */
+/* M.S. Hari specific aspect fix: completely eliminates squeeze on his camera photo */
+.founder-img.hari-img {
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* Animesh Sen exact untouched position */
+.founder-img.animesh-img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Caroline Daniel balanced portrait framing */
 .founder-img.caroline-img {
+  object-fit: cover;
   object-position: center 20%;
 }
 
@@ -661,7 +671,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   TRACK RECORD (PREVIOUSLY RESULTS)
+   TRACK RECORD SECTION
    ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
@@ -1003,7 +1013,8 @@ nav a:hover {
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-tagline reveal-item">Creative Film • Visual Storytelling • Cinematic Production</div>
-    <h1 class="hero-title reveal-item">Creative Film & Visual Storytelling</h1>
+    <!-- Updated Title -->
+    <h1 class="hero-title reveal-item">CREATIVE VIDEO PRODUCTION AGENCY</h1>
     <div class="hero-content reveal-item">
       <div class="hero-symbol">▶</div>
       <p class="hero-text">Handles brings professional filmmaking expertise to brand and business communication. We bring the storytelling, visual quality, and production approach of cinema into commercial content.</p>
@@ -1069,7 +1080,6 @@ nav a:hover {
         </div>
 
         <div style="margin-top: 35px; border-top: 1px solid rgba(0,0,0,0.12); padding-top: 25px;">
-          <!-- Clean Font for What We Offer Heading -->
           <h4 class="offer-subheading">What We Offer: End-to-End Execution</h4>
           <p class="about-desc-text" style="margin-bottom: 0;">
             Idea → Script → Pre-Production → Shoot → Direction → Cinematography → Editing → Graphics → Final Delivery. Depending on your requirement, we handle the entire project from concept to final cut.
@@ -1079,7 +1089,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- WHY HANDLES (RENAMED FROM OUR DIFFERENCE) -->
+  <!-- WHY HANDLES -->
   <section class="section-wrapper" id="why-handles">
     <div class="reveal-item">
       <h2 class="section-title-wix title-pulse-once">Why Handles</h2>
@@ -1124,10 +1134,10 @@ nav a:hover {
     </div>
 
     <div class="founders-grid">
-      <!-- Founder 1: M.S. Hari -->
+      <!-- Founder 1: M.S. Hari (Un-squeezed / Perfectly Framed) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
-          <img src="images/hari.jpg" alt="M.S. Hari - Founder & Director" class="founder-img">
+          <img src="images/hari.jpg" alt="M.S. Hari - Founder & Director" class="founder-img hari-img">
         </div>
         <div class="founder-body">
           <h3 class="founder-name">M.S. Hari</h3>
@@ -1141,7 +1151,7 @@ nav a:hover {
       <!-- Founder 2: Animesh Sen (Untouched & Clean) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
-          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
+          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img animesh-img">
         </div>
         <div class="founder-body">
           <h3 class="founder-name">Animesh Sen</h3>
@@ -1245,7 +1255,7 @@ nav a:hover {
           </a>
         </div>
 
-        <!-- Location Pill (Updated to Country Code format) -->
+        <!-- Location Pill -->
         <div class="location-box">
           <svg viewBox="0 0 24 24">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
