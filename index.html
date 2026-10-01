@@ -276,7 +276,7 @@ nav a:hover {
 }
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.3rem, 6vw, 5rem);
+  font-size: clamp(2.4rem, 6.2vw, 5.2rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -1.5px;
@@ -466,7 +466,7 @@ nav a:hover {
   color: #111111;
 }
 
-/* Service Grid */
+/* Service Grid (What We Do items) */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -579,7 +579,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   FOUNDERS SECTION (PRECISE FRAMING FOR ALL THREE)
+   FOUNDERS SECTION (DESKTOP & MOBILE NATURAL ASPECT RATIO FIX)
    ======================================================== */
 .founders-grid {
   display: grid;
@@ -602,37 +602,37 @@ nav a:hover {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
   border-color: rgba(255, 32, 32, 0.35);
 }
+
+/* Strict Box Framing - No Stretches or Squishing */
 .founder-img-box {
   width: 100%;
-  height: 380px;
+  aspect-ratio: 4 / 5;
+  max-height: 420px;
   overflow: hidden;
   background-color: rgba(17, 17, 17, 0.05);
   position: relative;
 }
 
-/* Default styling */
+/* Default / Untouched (Animesh Sen) */
 .founder-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
+  display: block;
   transition: transform 0.5s ease;
 }
 
-/* M.S. Hari specific aspect fix: completely eliminates squeeze on his camera photo */
+/* M.S. Hari Desktop & Mobile Natural Ratio Fix */
 .founder-img.hari-img {
-  object-fit: cover;
-  object-position: center 30%;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 32% center !important; /* Perfect natural focus on face without squishing */
 }
 
-/* Animesh Sen exact untouched position */
-.founder-img.animesh-img {
-  object-fit: cover;
-  object-position: top center;
-}
-
-/* Caroline Daniel balanced portrait framing */
+/* Specific framing for Caroline Daniel */
 .founder-img.caroline-img {
-  object-fit: cover;
   object-position: center 20%;
 }
 
@@ -671,7 +671,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   TRACK RECORD SECTION
+   TRACK RECORD (PREVIOUSLY RESULTS)
    ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
@@ -879,7 +879,8 @@ nav a:hover {
     gap: 24px;
   }
   .founder-img-box {
-    height: 340px;
+    aspect-ratio: 4 / 5;
+    max-height: 380px;
   }
   .metric-row-single {
     display: grid;
@@ -925,7 +926,8 @@ nav a:hover {
 /* Phone Specific Optimization */
 @media (max-width: 520px) {
   .founder-img-box {
-    height: 300px;
+    aspect-ratio: 4 / 5;
+    max-height: 330px;
   }
   .founder-body {
     padding: 20px 18px 24px;
@@ -938,7 +940,6 @@ nav a:hover {
     line-height: 1.6;
   }
   
-  /* Metrics Grid on Mobile: 2x2 Clean Layout */
   .metric-row-single {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -1010,11 +1011,10 @@ nav a:hover {
 </div>
 
 <main>
-  <!-- Hero Section -->
+  <!-- Hero Section (Updated to CREATIVE VIDEO PRODUCTION AGENCY) -->
   <section class="hero">
     <div class="hero-tagline reveal-item">Creative Film • Visual Storytelling • Cinematic Production</div>
-    <!-- Updated Title -->
-    <h1 class="hero-title reveal-item">CREATIVE VIDEO PRODUCTION AGENCY</h1>
+    <h1 class="hero-title reveal-item">Creative Video Production Agency</h1>
     <div class="hero-content reveal-item">
       <div class="hero-symbol">▶</div>
       <p class="hero-text">Handles brings professional filmmaking expertise to brand and business communication. We bring the storytelling, visual quality, and production approach of cinema into commercial content.</p>
@@ -1134,7 +1134,7 @@ nav a:hover {
     </div>
 
     <div class="founders-grid">
-      <!-- Founder 1: M.S. Hari (Un-squeezed / Perfectly Framed) -->
+      <!-- Founder 1: M.S. Hari (Unsqueezed & Aspect-Ratio Fixed on Desktop) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/hari.jpg" alt="M.S. Hari - Founder & Director" class="founder-img hari-img">
@@ -1151,11 +1151,11 @@ nav a:hover {
       <!-- Founder 2: Animesh Sen (Untouched & Clean) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
-          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img animesh-img">
+          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
         </div>
         <div class="founder-body">
           <h3 class="founder-name">Animesh Sen</h3>
-          <span class="founder-role">Co-Founder | Brand & Business Dev</span>
+          <span class="founder-role">Co-Founder | Brand & Business Development</span>
           <p class="founder-bio">
             Animesh has spent his career understanding what makes brands connect with people. From building client relationships and developing brand opportunities to shaping ideas into real-world projects, he brings a strong mix of business thinking and creative curiosity to Handles. He works closely with brands, creators, and production teams to discover stories worth telling and turn them into content people remember.
           </p>
