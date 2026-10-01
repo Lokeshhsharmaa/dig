@@ -341,7 +341,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Thought Banner (Desktop Single-Line Fix) --- */
+/* --- Brand Thought Banner (Clean 2-Lines Exactly as Requested) --- */
 .brand-thought-banner {
   max-width: 1400px;
   margin: 0 auto clamp(40px, 6vw, 70px);
@@ -352,7 +352,7 @@ nav a:hover {
   background: #111111;
   color: #ffffff;
   border-radius: 24px;
-  padding: clamp(28px, 4vw, 45px) clamp(16px, 3vw, 36px);
+  padding: clamp(32px, 5vw, 55px) clamp(20px, 4vw, 40px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 .thought-subtitle {
@@ -361,20 +361,17 @@ nav a:hover {
   text-transform: uppercase;
   color: #FF2020;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .thought-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.4rem, 2.75vw, 2.7rem);
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
   font-weight: 900;
   letter-spacing: -0.5px;
-  line-height: 1.25;
-  white-space: nowrap; /* Single line on desktop */
+  line-height: 1.2;
 }
-@media (max-width: 768px) {
-  .thought-title {
-    white-space: normal; /* Mobile par natural wrapping */
-  }
+.thought-title span {
+  display: block;
 }
 
 /* --- Section Layouts --- */
@@ -569,7 +566,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   FOUNDERS SECTION (THEMED BLEND & BALANCED FRAMING)
+   FOUNDERS SECTION (ORIGINAL RESTORED FOR ANIMESH & HARI)
    ======================================================== */
 .founders-grid {
   display: grid;
@@ -599,13 +596,21 @@ nav a:hover {
   background-color: rgba(17, 17, 17, 0.05);
   position: relative;
 }
+
+/* Default / Original for Hari and Animesh */
 .founder-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%; /* Optimal head-to-shoulder framing */
+  object-position: top center; /* Original exact position untouched */
   transition: transform 0.5s ease;
 }
+
+/* Specific framing ONLY applied to Caroline Daniel */
+.founder-img.caroline-img {
+  object-position: center 20%;
+}
+
 .founder-card:hover .founder-img {
   transform: scale(1.04);
 }
@@ -641,7 +646,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   PROVEN TRACK RECORD SECTION (OVERFLOW FIXED)
+   PROVEN TRACK RECORD SECTION
    ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
@@ -685,7 +690,7 @@ nav a:hover {
   justify-content: center;
   align-items: flex-start;
   min-width: 0;
-  overflow: hidden; /* Text box ke bahar na nikle */
+  overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
 }
 .metric-box-card:hover,
@@ -849,7 +854,7 @@ nav a:hover {
     gap: 24px;
   }
   .founder-img-box {
-    height: 330px;
+    height: 340px;
   }
   .metric-row-single {
     display: grid;
@@ -892,14 +897,10 @@ nav a:hover {
   }
 }
 
-/* Phone Specific Optimization (Compact, Fit & Framed) */
+/* Phone Specific Optimization */
 @media (max-width: 520px) {
-  /* Caroline Daniel & Founders image properly framed on phones */
   .founder-img-box {
-    height: 300px; /* Enhanced height for portrait view */
-  }
-  .founder-img {
-    object-position: center 20%; /* Shows natural head & shoulders */
+    height: 300px;
   }
   .founder-body {
     padding: 20px 18px 24px;
@@ -921,7 +922,6 @@ nav a:hover {
     padding: 16px 10px;
     border-radius: 16px;
   }
-  /* 32-48% font scaled down safely so '%' never clips */
   .metric-box-card h3 {
     font-size: 1.25rem;
     letter-spacing: -0.3px;
@@ -995,11 +995,14 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- Brand Thought Banner (Single-Line on Desktop) -->
+  <!-- Brand Thought Banner (2 Lines Clean Layout) -->
   <div class="brand-thought-banner reveal-item">
     <div class="thought-card">
       <div class="thought-subtitle">Our Brand Thought</div>
-      <h2 class="thought-title">CREATING STORIES. BUILDING ATTENTION.</h2>
+      <h2 class="thought-title">
+        <span>CREATING STORIES.</span>
+        <span>BUILDING ATTENTION.</span>
+      </h2>
     </div>
   </div>
 
@@ -1118,7 +1121,7 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 2: Animesh Sen -->
+      <!-- Founder 2: Animesh Sen (Original Setting Untouched) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
@@ -1132,10 +1135,10 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 3: Caroline Daniel -->
+      <!-- Founder 3: Caroline Daniel (Custom Balanced Framing Only For Her) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
-          <img src="images/caroline.jpg" alt="Caroline Daniel - Co-Founder" class="founder-img">
+          <img src="images/caroline.jpg" alt="Caroline Daniel - Co-Founder" class="founder-img caroline-img">
         </div>
         <div class="founder-body">
           <h3 class="founder-name">Caroline Daniel</h3>
@@ -1148,7 +1151,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- PROVEN TRACK RECORD METRICS SECTION (PHONE 2x2 FIX) -->
+  <!-- WIDE METRICS SECTION (PROVEN TRACK RECORD) -->
   <div class="metrics-wrapper-wide">
     <section class="metrics reveal-item" id="track-record">
       <h2 class="section-title-wix">Proven Track Record</h2>
