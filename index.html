@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-<title>Handles | Video Production Agency</title>
+<title>Handles | Creative Film & Visual Storytelling</title>
 
-<!-- Fonts matching Wix template -->
+<!-- Fonts matching template -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -151,13 +151,13 @@ body {
   margin: 0 !important;
 }
 
-/* --- Header & Brand Logo --- */
+/* --- Header & Brand Logo Fix --- */
 header {
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 5vw;
+  padding: 16px 5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -169,10 +169,12 @@ header {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .logo-img {
   height: 38px;
   width: auto;
+  max-width: 160px;
   object-fit: contain;
   display: block;
 }
@@ -184,6 +186,7 @@ header {
   color: #FF2020;
   text-transform: uppercase;
   line-height: 1;
+  white-space: nowrap;
 }
 nav {
   display: flex;
@@ -193,7 +196,7 @@ nav a {
   font-family: 'Syne', sans-serif;
   color: #111111;
   text-decoration: none;
-  margin-left: clamp(20px, 3vw, 40px);
+  margin-left: clamp(16px, 2.5vw, 36px);
   font-size: 15px;
   font-weight: 800;
   letter-spacing: -0.3px;
@@ -221,7 +224,7 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 40px 20px;
@@ -231,7 +234,7 @@ nav a:hover {
 }
 .mobile-nav a {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(26px, 6.5vw, 36px);
+  font-size: clamp(24px, 6vw, 34px);
   color: #111111;
   text-decoration: none;
   font-weight: 800;
@@ -269,22 +272,18 @@ nav a:hover {
 }
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-size: clamp(2.5rem, 6.5vw, 5.2rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -1.5px;
   margin-bottom: 35px;
   padding-bottom: 0.12em;
-  text-transform: capitalize;
+  text-transform: uppercase;
   background: linear-gradient(45deg, #FF2020, #ff8800, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: block;
   overflow: visible;
-  transition: transform 0.3s ease;
-}
-.hero-title:hover {
-  transform: scale(1.01);
 }
 .hero-content {
   display: grid;
@@ -302,22 +301,12 @@ nav a:hover {
   justify-content: center;
   font-size: 16px;
   color: #111;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-.hero-content:hover .hero-symbol {
-  transform: scale(1.1) rotate(90deg);
-  background-color: #FF2020;
-  color: #ffffff;
 }
 .hero-text {
   font-size: clamp(16px, 1.8vw, 18px);
   line-height: 1.6;
   color: #bbbbbb;
   max-width: 650px;
-  transition: color 0.3s ease;
-}
-.hero-text:hover {
-  color: #ffffff;
 }
 
 /* --- Buttons --- */
@@ -352,136 +341,61 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Marquee (Equal Spacing Between All Logos) --- */
-.brand-bar {
-  width: 100%;
-  margin: 0 auto clamp(50px, 6vw, 80px);
-  overflow: hidden;
+/* --- Brand Thought Banner --- */
+.brand-thought-banner {
+  max-width: 1360px;
+  margin: 0 auto clamp(40px, 6vw, 70px);
+  padding: 0 4vw;
   text-align: center;
 }
-.brand-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.thought-card {
   background: #111111;
   color: #ffffff;
-  padding: 8px 24px;
-  border-radius: 30px;
-  font-family: 'Syne', sans-serif;
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 45px) 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+.thought-subtitle {
   font-size: 13px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  letter-spacing: 2.5px;
+  color: #FF2020;
   font-weight: 800;
-  margin-bottom: 35px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: auto !important;
-  max-width: fit-content;
-  white-space: nowrap;
+  margin-bottom: 10px;
 }
-.brand-badge::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  background-color: #FF2020;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
-}
-.marquee-container {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  position: relative;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  padding: 10px 0;
-  width: 100%;
-}
-.marquee-track {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-  padding-right: 20px;
-  animation: scrollMarquee 26s linear infinite;
-}
-.marquee-container:hover .marquee-track {
-  animation-play-state: paused;
-}
-.brand-card-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 18px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.brand-card-item:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-.brand-card-item img {
-  max-height: 32px;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  margin: 0 auto;
+.thought-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
-@keyframes scrollMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-
-/* --- Content Wrapper --- */
+/* --- Section Layouts --- */
 .section-wrapper {
   max-width: 1360px;
   margin: 0 auto;
   padding: clamp(45px, 6vw, 85px) 4vw;
 }
 
-/* ========================================================
-   HEADINGS: ONE-TIME HIGHLIGHT THEN BACK TO NORMAL BLACK
-   ======================================================== */
 .section-title-wix {
   font-family: 'Syne', sans-serif;
   font-size: clamp(2.2rem, 3.8vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -1px;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 12px;
-  padding-bottom: 0.1em;
+  padding-bottom: 0.15em;
   color: #111111;
   word-break: normal;
   overflow: visible;
   cursor: default;
 }
 
-/* Animation that pulses red ONCE then settles permanently to black */
 @keyframes highlightOnce {
-  0% {
-    color: #111111;
-    transform: translateX(0);
-  }
-  35% {
-    color: #FF2020;
-    transform: translateX(6px);
-  }
-  100% {
-    color: #111111;
-    transform: translateX(0);
-  }
+  0% { color: #111111; transform: translateX(0); }
+  35% { color: #FF2020; transform: translateX(6px); }
+  100% { color: #111111; transform: translateX(0); }
 }
 
 .section-title-wix.highlight-pulse {
@@ -494,7 +408,7 @@ nav a:hover {
   margin-bottom: clamp(35px, 5vw, 55px);
 }
 
-/* --- WHAT WE DO (Split Layout) --- */
+/* --- ABOUT & SPLIT SECTIONS --- */
 .wix-split-section {
   display: grid;
   grid-template-columns: 340px 1fr;
@@ -526,47 +440,44 @@ nav a:hover {
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   line-height: 1.55;
   color: #111111;
-  margin-bottom: 35px;
-  font-weight: 500;
-  padding: 10px 14px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+.about-desc-text {
+  font-size: 16px;
+  color: #333333;
+  line-height: 1.8;
+  margin-bottom: 24px;
 }
 
-.wix-service-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: 35px;
+/* Service Grid (What We Do items) */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 30px 0;
 }
-.wix-service-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 18px 12px 6px 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: default;
-}
-.wix-service-item:hover,
-.wix-service-item.is-scroll-active {
-  background-color: rgba(255, 32, 32, 0.05);
-  transform: translateX(8px);
-}
-.wix-service-item h4 {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 800;
-  margin-bottom: 8px;
-  transition: color 0.3s ease;
-}
-.wix-service-item:hover h4,
-.wix-service-item.is-scroll-active h4 {
-  color: #FF2020;
-}
-.wix-service-item p {
+.service-pill-item {
+  background: rgba(17, 17, 17, 0.04);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-weight: 700;
   font-size: 15px;
-  color: #555;
-  line-height: 1.5;
+  color: #111111;
+  transition: all 0.25s ease;
+}
+.service-pill-item:hover,
+.service-pill-item.is-scroll-active {
+  background: #111111;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-/* --- OUR APPROACH (Capsule Cards) --- */
+/* ========================================================
+   OUR KEY DIFFERENCE (FIXED TEXT OVERLAPPING ISSUE)
+   ======================================================== */
 .wix-card-stack {
   display: flex;
   flex-direction: column;
@@ -577,16 +488,16 @@ nav a:hover {
   border-radius: 30px;
   padding: clamp(28px, 4vw, 42px) clamp(25px, 4vw, 50px);
   display: grid;
-  grid-template-columns: 220px 1fr 40px;
+  /* Dynamic width prevents overlapping of longer titles like Cinematography & Tech */
+  grid-template-columns: minmax(280px, 320px) 1fr 40px;
   align-items: center;
-  gap: 30px;
+  gap: clamp(30px, 4vw, 50px);
   border: 1.5px solid rgba(17, 17, 17, 0.09);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
-
 .wix-capsule-card::before {
   content: "";
   position: absolute;
@@ -599,40 +510,39 @@ nav a:hover {
   transform: scaleY(0);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
 .wix-capsule-card:hover,
 .wix-capsule-card.is-scroll-active {
   transform: translateX(8px);
   border-color: rgba(255, 32, 32, 0.35);
   box-shadow: -4px 10px 30px rgba(255, 32, 32, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
 }
-
 .wix-capsule-card:hover::before,
 .wix-capsule-card.is-scroll-active::before {
   opacity: 1;
   transform: scaleY(1);
 }
-
 .wix-capsule-title {
   font-family: 'Syne', sans-serif;
-  font-size: 1.45rem;
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
   font-weight: 800;
   color: #111111;
+  line-height: 1.25;
+  padding-bottom: 0.1em;
+  word-break: normal;
+  overflow-wrap: break-word;
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
 .wix-capsule-card:hover .wix-capsule-title,
 .wix-capsule-card.is-scroll-active .wix-capsule-title {
   color: #FF2020;
   transform: translateX(4px);
 }
-
 .wix-capsule-desc {
   font-size: 15px;
   color: #444444;
-  line-height: 1.6;
+  line-height: 1.65;
+  min-width: 0;
 }
-
 .wix-capsule-dots {
   display: grid;
   grid-template-columns: repeat(2, 6px);
@@ -653,7 +563,82 @@ nav a:hover {
   transform: scale(1.2);
 }
 
-/* --- WIDE METRICS SECTION (4 STATS IN ONE LINE) --- */
+/* ========================================================
+   FOUNDERS SECTION (THEMED BLEND & HOVER POP)
+   ======================================================== */
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 36px);
+}
+.founder-card {
+  background: #ffffcc;
+  border: 1.5px solid rgba(17, 17, 17, 0.12);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+.founder-card:hover,
+.founder-card.is-scroll-active {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 16px 36px rgba(255, 32, 32, 0.12);
+  border-color: #FF2020;
+  background-color: #ffffff;
+}
+.founder-img-box {
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background-color: #eaeaa8;
+  position: relative;
+}
+.founder-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+.founder-card:hover .founder-img {
+  transform: scale(1.05);
+}
+.founder-body {
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.founder-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #111111;
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
+}
+.founder-card:hover .founder-name {
+  color: #FF2020;
+}
+.founder-role {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #FF2020;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.founder-bio {
+  font-size: 14.5px;
+  color: #444444;
+  line-height: 1.65;
+}
+
+/* ========================================================
+   PROVEN TRACK RECORD SECTION
+   ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
   margin: 0 auto;
@@ -728,24 +713,20 @@ nav a:hover {
   white-space: nowrap;
 }
 
-/* --- CONTACT SECTION --- */
+/* --- CONTACT SECTION & DIRECT FORM --- */
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 6vw, 90px);
   align-items: start;
 }
-
-/* Strictly Clean & Black Subtitle */
 .contact-pitch-clean {
   font-size: 17px;
   font-weight: 700;
   margin: 15px 0 10px;
   color: #111111 !important;
   user-select: none;
-  pointer-events: none; /* Prevents unwanted highlight activation */
 }
-
 .form-group {
   margin-bottom: 22px;
 }
@@ -767,7 +748,7 @@ nav a:hover {
   border-color: #FF2020;
 }
 
-/* Cohesive Coloured Buttons for Phone, Email, WhatsApp, and Instagram */
+/* Direct Action Buttons */
 .social-channels {
   display: flex;
   flex-direction: column;
@@ -799,28 +780,46 @@ nav a:hover {
   flex-shrink: 0;
 }
 
-/* Phone: Vibrant Blue Gradient */
-.channel-phone {
+.channel-phone-india {
   background: linear-gradient(135deg, #007AFF 0%, #0051D4 100%);
   color: #ffffff;
 }
-
-/* Email: Handles Red / Coral Gradient */
+.channel-phone-uae {
+  background: linear-gradient(135deg, #2A5298 0%, #1E3C72 100%);
+  color: #ffffff;
+}
 .channel-email {
   background: linear-gradient(135deg, #FF3B30 0%, #D61A1A 100%);
   color: #ffffff;
 }
-
-/* WhatsApp: Official Green Gradient */
 .channel-whatsapp {
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   color: #ffffff;
 }
-
-/* Instagram: Official Gradient */
 .channel-instagram {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff;
+}
+
+/* Location Badge Box */
+.location-box {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  width: fit-content;
+}
+.location-box svg {
+  width: 18px;
+  height: 18px;
+  fill: #FF2020;
 }
 
 /* --- Scroll Reveal Animations --- */
@@ -835,8 +834,15 @@ nav a:hover {
   transform: translateY(0);
 }
 
-/* --- Responsive Queries --- */
-@media (max-width: 950px) {
+/* --- Responsive Breakpoints --- */
+@media (max-width: 980px) {
+  .founders-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .founder-img-box {
+    height: 420px;
+  }
   .metric-row-single {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -855,7 +861,7 @@ nav a:hover {
   }
   .wix-capsule-card {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
   }
   .wix-capsule-dots {
     display: none;
@@ -880,19 +886,11 @@ nav a:hover {
   .metric-row-single {
     grid-template-columns: 1fr;
   }
-  .brand-badge {
-    font-size: 10px;
-    padding: 6px 16px;
-    letter-spacing: 1.5px;
+  .wix-capsule-title {
+    font-size: 1.25rem;
   }
-  .marquee-track {
-    gap: 14px;
-    padding-right: 14px;
-  }
-  .brand-card-item {
-    width: 125px;
-    height: 56px;
-    padding: 8px 12px;
+  .logo-text {
+    font-size: 1.4rem;
   }
 }
 </style>
@@ -916,8 +914,10 @@ nav a:hover {
   </a>
 
   <nav>
+    <a href="#about">About</a>
     <a href="#what-we-do">What We Do</a>
-    <a href="#approach">Our Approach</a>
+    <a href="#key-difference">Our Difference</a>
+    <a href="#founders">Founders</a>
     <a href="#track-record">Results</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -926,8 +926,10 @@ nav a:hover {
 
 <div class="mobile-nav">
   <div class="close-btn" onclick="document.querySelector('.mobile-nav').classList.remove('active')">×</div>
+  <a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('active')">About</a>
   <a href="#what-we-do" onclick="document.querySelector('.mobile-nav').classList.remove('active')">What We Do</a>
-  <a href="#approach" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Our Approach</a>
+  <a href="#key-difference" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Our Difference</a>
+  <a href="#founders" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Founders</a>
   <a href="#track-record" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Results</a>
   <a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Contact</a>
 </div>
@@ -935,41 +937,44 @@ nav a:hover {
 <main>
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-tagline reveal-item">Creative • Production • Post</div>
-    <h1 class="hero-title reveal-item">Video Production Agency</h1>
+    <div class="hero-tagline reveal-item">Creative Film • Visual Storytelling • Cinematic Production</div>
+    <h1 class="hero-title reveal-item">Creative Film & Visual Storytelling</h1>
     <div class="hero-content reveal-item">
       <div class="hero-symbol">▶</div>
-      <p class="hero-text">We make high-performing videos for leading brands. From viral short-form reels to commercial ad films, we turn ideas into scroll-stopping content that performs.</p>
+      <p class="hero-text">Handles brings professional filmmaking expertise to brand and business communication. We bring the storytelling, visual quality, and production approach of cinema into commercial content.</p>
       <a href="#contact" class="btn-pill btn-hero">Start Project</a>
     </div>
   </section>
 
-  <!-- Marquee Logos with Local Images -->
-  <div class="brand-bar reveal-item">
-    <div class="brand-badge">Trusted By Top Brands</div>
-    <div class="marquee-container">
-      <div class="marquee-track">
-        <div class="brand-card-item"><img src="images/amazon.png" alt="Amazon"></div>
-        <div class="brand-card-item"><img src="images/flipkart.png" alt="Flipkart"></div>
-        <div class="brand-card-item"><img src="images/himalaya.png" alt="Himalaya"></div>
-        <div class="brand-card-item"><img src="images/lenskart.png" alt="Lenskart"></div>
-        <div class="brand-card-item"><img src="images/grt.png" alt="GRT Jewellers"></div>
-        <div class="brand-card-item"><img src="images/dbs.png" alt="DBS Bank"></div>
-        <div class="brand-card-item"><img src="images/finolex.png" alt="Finolex Pipes"></div>
-        <div class="brand-card-item"><img src="images/m4marry.png" alt="m4marry.com"></div>
-      </div>
-      <div class="marquee-track" aria-hidden="true">
-        <div class="brand-card-item"><img src="images/amazon.png" alt="Amazon"></div>
-        <div class="brand-card-item"><img src="images/flipkart.png" alt="Flipkart"></div>
-        <div class="brand-card-item"><img src="images/himalaya.png" alt="Himalaya"></div>
-        <div class="brand-card-item"><img src="images/lenskart.png" alt="Lenskart"></div>
-        <div class="brand-card-item"><img src="images/grt.png" alt="GRT Jewellers"></div>
-        <div class="brand-card-item"><img src="images/dbs.png" alt="DBS Bank"></div>
-        <div class="brand-card-item"><img src="images/finolex.png" alt="Finolex Pipes"></div>
-        <div class="brand-card-item"><img src="images/m4marry.png" alt="m4marry.com"></div>
-      </div>
+  <!-- Brand Thought Banner -->
+  <div class="brand-thought-banner reveal-item">
+    <div class="thought-card">
+      <div class="thought-subtitle">Our Brand Thought</div>
+      <h2 class="thought-title">CREATING STORIES. BUILDING ATTENTION.</h2>
     </div>
   </div>
+
+  <!-- ABOUT HANDLES: WHO WE ARE -->
+  <section class="section-wrapper" id="about">
+    <div class="wix-split-section">
+      <div class="wix-split-left reveal-item">
+        <h2 class="section-title-wix title-pulse-once">About Handles</h2>
+        <div class="wix-decorative-dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wix-split-right reveal-item">
+        <p class="lead">Handles is a creative film and visual storytelling company.</p>
+        <p class="about-desc-text">
+          We create videos and visual content for brands, businesses, and institutions. But we are not just a regular video production company.
+        </p>
+        <p class="about-desc-text">
+          Our entire creative and production team comes from a professional film background — including directors, cinematographers, editors, and seasoned film technicians. Because of this, we bring the thinking, storytelling, visual quality, and production approach of cinema into commercial and brand content.
+        </p>
+        <a href="#what-we-do" class="btn-pill">Explore Our Work</a>
+      </div>
+    </div>
+  </section>
 
   <!-- WHAT WE DO -->
   <section class="section-wrapper" id="what-we-do">
@@ -981,70 +986,59 @@ nav a:hover {
         </div>
       </div>
       <div class="wix-split-right reveal-item">
-        <p class="lead">
-          At Handles, we are passionate about crafting impactful, algorithm-optimized video campaigns that drive real commercial results.
-        </p>
-        <div class="wix-service-list">
-          <div class="wix-service-item">
-            <h4>Short-Form Content</h4>
-            <p>Engineered for high algorithmic reach, personal branding, watch time, and rapid follower conversion.</p>
-          </div>
-          <div class="wix-service-item">
-            <h4>TVC Commercials</h4>
-            <p>Broadcast and digital commercial ad films built to retain audience attention in the first three seconds.</p>
-          </div>
-          <div class="wix-service-item">
-            <h4>Corporate Videos</h4>
-            <p>High-end narrative films communicating company scale, executive vision, and customer trust.</p>
-          </div>
-          <div class="wix-service-item">
-            <h4>Post-Production</h4>
-            <p>Studio-grade editing, color science, 3D/VFX motion graphics, and audio mastering.</p>
-          </div>
+        <p class="lead">From cinematic ad films to viral social campaigns, we craft engaging content formatted to capture audience attention.</p>
+        
+        <div class="services-grid">
+          <div class="service-pill-item">Brand Films</div>
+          <div class="service-pill-item">Corporate Films</div>
+          <div class="service-pill-item">Commercials & Advertisements</div>
+          <div class="service-pill-item">Social Media Videos / Reels</div>
+          <div class="service-pill-item">Influencer & Creator Campaigns</div>
+          <div class="service-pill-item">Product & Service Videos</div>
+          <div class="service-pill-item">Project & Launch Films</div>
+          <div class="service-pill-item">Institutional Films</div>
+          <div class="service-pill-item">Event Videos</div>
         </div>
-        <a href="#contact" class="btn-pill">Learn More</a>
+
+        <div style="margin-top: 35px; border-top: 1px solid rgba(0,0,0,0.12); padding-top: 25px;">
+          <h4 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 10px;">What We Offer: End-to-End Execution</h4>
+          <p class="about-desc-text" style="margin-bottom: 0;">
+            Idea → Script → Pre-Production → Shoot → Direction → Cinematography → Editing → Graphics → Final Delivery. Depending on your requirement, we handle the entire project from concept to final cut.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- OUR APPROACH -->
-  <section class="section-wrapper" id="approach">
+  <!-- OUR KEY DIFFERENCE (OVERLAP FIXED) -->
+  <section class="section-wrapper" id="key-difference">
     <div class="reveal-item">
-      <h2 class="section-title-wix title-pulse-once">Our Approach</h2>
-      <p class="section-subtitle-wix">Discover how we turn your requirements into high-performing content.</p>
+      <h2 class="section-title-wix title-pulse-once">Our Key Difference</h2>
+      <p class="section-subtitle-wix">We don't just shoot videos. We approach every project like filmmakers.</p>
     </div>
     <div class="wix-card-stack">
       <div class="wix-capsule-card reveal-item">
-        <div class="wix-capsule-title">Concept</div>
+        <div class="wix-capsule-title">Filmmaking Craft</div>
         <div class="wix-capsule-desc">
-          We analyze your target market and turn your requirement into a bulletproof creative hook.
+          Our team understands deep narrative storytelling, cinema-grade direction, and evocative visual language that elevates your brand identity.
         </div>
         <div class="wix-capsule-dots">
           <span></span><span></span><span></span><span></span>
         </div>
       </div>
       <div class="wix-capsule-card reveal-item">
-        <div class="wix-capsule-title">Planning</div>
+        <div class="wix-capsule-title">Cinematography & Tech</div>
         <div class="wix-capsule-desc">
-          We lock down the script, storyboard, shoot logistics, schedule, and casting setup.
+          Studio-grade camera work, deliberate lighting setups, and disciplined production management executed by experienced film crew members.
         </div>
         <div class="wix-capsule-dots">
           <span></span><span></span><span></span><span></span>
         </div>
       </div>
       <div class="wix-capsule-card reveal-item">
-        <div class="wix-capsule-title">Shoot</div>
+        <div class="wix-capsule-title">Audience Attention</div>
         <div class="wix-capsule-desc">
-          We capture everything on-set with professional precision, directing every frame and angle.
-        </div>
-        <div class="wix-capsule-dots">
-          <span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-      <div class="wix-capsule-card reveal-item">
-        <div class="wix-capsule-title">Edit & Delivery</div>
-        <div class="wix-capsule-desc">
-          We edit it clean, grade it, mix the sound, and deliver final content formatted to perform across platforms.
+          We engineer our cuts, sound design, and color grading specifically to stop thumbs and retain viewer attention in the opening frames.
         </div>
         <div class="wix-capsule-dots">
           <span></span><span></span><span></span><span></span>
@@ -1053,7 +1047,59 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- WIDE METRICS SECTION -->
+  <!-- ABOUT THE FOUNDERS -->
+  <section class="section-wrapper" id="founders">
+    <div class="reveal-item">
+      <h2 class="section-title-wix title-pulse-once">About the Founders</h2>
+      <p class="section-subtitle-wix">The creative and strategic leadership driving Handles across India and the UAE.</p>
+    </div>
+
+    <div class="founders-grid">
+      <!-- Founder 1: M.S. Hari -->
+      <div class="founder-card reveal-item">
+        <div class="founder-img-box">
+          <img src="images/hari.jpg" alt="M.S. Hari - Founder & Director" class="founder-img">
+        </div>
+        <div class="founder-body">
+          <h3 class="founder-name">M.S. Hari</h3>
+          <span class="founder-role">Founder & Director</span>
+          <p class="founder-bio">
+            M.S. Hari is the Founder and Director of Handles, with over a decade of experience in the film, advertising, and video production industry. Having worked across direction, creative development, and production, he has been part of projects for leading brands including Amazon, Flipkart, Lenskart, Finolex, Max Fashion, and GRT. With a strong passion for visual communication, Hari founded Handles to bring filmmaking quality and creative thinking under one roof.
+          </p>
+        </div>
+      </div>
+
+      <!-- Founder 2: Animesh Sen -->
+      <div class="founder-card reveal-item">
+        <div class="founder-img-box">
+          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
+        </div>
+        <div class="founder-body">
+          <h3 class="founder-name">Animesh Sen</h3>
+          <span class="founder-role">Co-Founder | Brand & Business Dev</span>
+          <p class="founder-bio">
+            Animesh has spent his career understanding what makes brands connect with people. From building client relationships and developing brand opportunities to shaping ideas into real-world projects, he brings a strong mix of business thinking and creative curiosity to Handles. He works closely with brands, creators, and production teams to discover stories worth telling and turn them into content people remember.
+          </p>
+        </div>
+      </div>
+
+      <!-- Founder 3: Caroline Daniel -->
+      <div class="founder-card reveal-item">
+        <div class="founder-img-box">
+          <img src="images/caroline.jpg" alt="Caroline Daniel - Co-Founder" class="founder-img">
+        </div>
+        <div class="founder-body">
+          <h3 class="founder-name">Caroline Daniel</h3>
+          <span class="founder-role">Co-Founder | UAE Operations & Client Relations</span>
+          <p class="founder-bio">
+            Caroline Daniel is part of Handles’ UAE team, helping build the company’s presence and connect with clients across the region. Based in the UAE, she looks after client communication, project coordination, and local business operations, working closely with the creative team in India to deliver seamless execution and quality visual content tailored to client needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDE METRICS SECTION (PROVEN TRACK RECORD) -->
   <div class="metrics-wrapper-wide">
     <section class="metrics reveal-item" id="track-record">
       <h2 class="section-title-wix">Proven Track Record</h2>
@@ -1085,57 +1131,74 @@ nav a:hover {
     <div class="contact-container reveal-item">
       <div>
         <h2 class="section-title-wix title-pulse-once">Let's Work Together</h2>
-        <!-- Completely Normal Black Text (No Highlights) -->
-        <p class="contact-pitch-clean">Your Idea + Our Production = Content That Performs.</p>
+        <p class="contact-pitch-clean">Good Business Begins With Great Content.</p>
         
-        <!-- Direct Interactive Coloured Contact Channels -->
+        <!-- Direct Interactive Contact Channels -->
         <div class="social-channels">
-          <!-- Phone Button (Vibrant Blue) -->
-          <a href="tel:+917904606332" class="channel-btn channel-phone">
+          <!-- India Call Button -->
+          <a href="tel:+919150919222" class="channel-btn channel-phone-india">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
             </svg>
-            +91 79046 06332
+            +91 91509 19222 (India)
           </a>
 
-          <!-- Email Button (Agency Red) -->
-          <a href="mailto:hellohandles@gmail.com" class="channel-btn channel-email">
+          <!-- UAE Call Button -->
+          <a href="tel:+9710541504459" class="channel-btn channel-phone-uae">
             <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
             </svg>
-            hellohandles@gmail.com
+            +971 054 150 4459 (Dubai / UAE)
           </a>
 
-          <!-- WhatsApp Button (Official Green) -->
-          <a href="https://wa.me/917904606332?text=Hello%20Handles%20Team,%20I'm%20interested%20in%20starting%20a%20video%20project." target="_blank" rel="noopener noreferrer" class="channel-btn channel-whatsapp">
+          <!-- Single Dedicated WhatsApp Chat -->
+          <a href="https://wa.me/919150919222?text=Hello%20Handles%20Team,%20I'm%20interested%20in%20discussing%20a%20project." target="_blank" rel="noopener noreferrer" class="channel-btn channel-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.54 1.83.827 2.796.827 3.182 0 5.768-2.587 5.769-5.767.001-3.181-2.584-5.766-5.769-5.766zm9.969 5.766c-.002 5.519-4.49 9.998-10.009 9.998-1.724 0-3.359-.444-4.79-1.222l-5.201 1.364 1.389-5.074c-.878-1.493-1.389-3.238-1.389-5.066.002-5.519 4.49-9.998 10.009-9.998 5.519 0 9.991 4.479 9.991 9.998z"/>
             </svg>
             Chat on WhatsApp
           </a>
 
-          <!-- Instagram Button (Gradient Mesh) -->
-          <a href="https://instagram.com/handles.agency" target="_blank" rel="noopener noreferrer" class="channel-btn channel-instagram">
+          <!-- Email Button -->
+          <a href="mailto:info@handles.digital" class="channel-btn channel-email">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            info@handles.digital
+          </a>
+
+          <!-- Instagram Button -->
+          <a href="https://www.instagram.com/handles_digital" target="_blank" rel="noopener noreferrer" class="channel-btn channel-instagram">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
             Follow on Instagram
           </a>
         </div>
+
+        <!-- Location Pill -->
+        <div class="location-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Chennai | Dubai
+        </div>
       </div>
+
+      <!-- Direct Form (Formspree + Native fallback) -->
       <div>
-        <form onsubmit="event.preventDefault(); alert('Inquiry Sent Successfully');">
+        <form action="https://formspree.io/f/info@handles.digital" method="POST" id="contactForm">
           <div class="form-group">
-            <input type="text" placeholder="Your Name *" required>
+            <input type="text" name="name" id="userName" placeholder="Your Name *" required>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Company / Brand Name *" required>
+            <input type="text" name="company" id="userCompany" placeholder="Company / Brand Name *" required>
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Email Address *" required>
+            <input type="email" name="_replyto" id="userEmail" placeholder="Email Address *" required>
           </div>
           <div class="form-group">
-            <textarea placeholder="Tell us about your project (Reels, TVC, Corporate, etc.)" rows="4"></textarea>
+            <textarea name="message" id="userMessage" placeholder="Tell us about your project (Brand Film, Corporate, Commercial, etc.)" rows="4" required></textarea>
           </div>
           <button type="submit" class="btn-pill" style="border:none; cursor:pointer;">Submit</button>
         </form>
@@ -1144,7 +1207,7 @@ nav a:hover {
   </section>
 </main>
 
-<!-- Scroll Animations & One-Time Heading Highlight Engine -->
+<!-- Scroll Reveal Animation & One-Time Heading Highlight Engine -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Initial Entrance Fade-in
@@ -1167,7 +1230,6 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("highlight-pulse");
-        // Disconnect after running once so it never triggers again
         obs.unobserve(entry.target);
       }
     });
@@ -1179,7 +1241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 3. Service items and interactive cards (dynamic active viewport tracking on mobile)
   const isTouchDevice = window.matchMedia("(hover: none)").matches;
-  const cardsAndItems = document.querySelectorAll(".wix-service-item, .wix-capsule-card, .metric-box-card");
+  const cardsAndItems = document.querySelectorAll(".service-pill-item, .wix-capsule-card, .founder-card, .metric-box-card");
 
   const scrollActiveObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1190,10 +1252,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, {
-    threshold: isTouchDevice ? 0.45 : 0.6,
+    threshold: isTouchDevice ? 0.35 : 0.5,
     rootMargin: "-10% 0px -20% 0px"
   });
   cardsAndItems.forEach((target) => scrollActiveObserver.observe(target));
+
+  // 4. Contact Form Direct Email Handler
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function(e) {
+      const name = encodeURIComponent(document.getElementById("userName").value);
+      const company = encodeURIComponent(document.getElementById("userCompany").value);
+      const email = encodeURIComponent(document.getElementById("userEmail").value);
+      const message = encodeURIComponent(document.getElementById("userMessage").value);
+
+      const subject = encodeURIComponent(`New Project Inquiry from ${name} (${company})`);
+      const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\nProject Details:\n${message}`);
+
+      window.location.href = `mailto:info@handles.digital?subject=${subject}&body=${body}`;
+    });
+  }
 });
 </script>
 
@@ -1243,7 +1321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hideCursor();
   });
 
-  // Touch Tracking for Phone, iPad & Tablets (Smooth Glide to Touch)
+  // Touch Tracking for Phone, iPad & Tablets
   function handleTouch(e) {
     if (e.touches && e.touches.length > 0) {
       targetX = e.touches[0].clientX;
@@ -1307,8 +1385,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 250);
   }, { passive: true });
 
-  // Interactive Hover Magnifier for links, buttons & text elements
-  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .brand-card-item, .wix-capsule-card, .metric-box-card, .channel-btn, .wix-service-item, .hero-title");
+  // Interactive Hover Magnifier for links, buttons & cards
+  const interactiveTargets = document.querySelectorAll("a, button, input, textarea, .service-pill-item, .wix-capsule-card, .founder-card, .metric-box-card, .channel-btn");
   interactiveTargets.forEach((el) => {
     el.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
     el.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
