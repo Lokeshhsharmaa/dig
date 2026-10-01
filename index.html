@@ -151,7 +151,7 @@ body {
   margin: 0 !important;
 }
 
-/* --- Header & Exact Natural Logo Ratio Fix --- */
+/* --- Header & Brand Logo --- */
 header {
   position: sticky;
   top: 0;
@@ -341,9 +341,9 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Thought Banner --- */
+/* --- Brand Thought Banner (Desktop Single-Line Fix) --- */
 .brand-thought-banner {
-  max-width: 1360px;
+  max-width: 1400px;
   margin: 0 auto clamp(40px, 6vw, 70px);
   padding: 0 4vw;
   text-align: center;
@@ -352,7 +352,7 @@ nav a:hover {
   background: #111111;
   color: #ffffff;
   border-radius: 24px;
-  padding: clamp(28px, 4vw, 45px) 24px;
+  padding: clamp(28px, 4vw, 45px) clamp(16px, 3vw, 36px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 .thought-subtitle {
@@ -361,14 +361,20 @@ nav a:hover {
   text-transform: uppercase;
   color: #FF2020;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .thought-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.4rem, 2.75vw, 2.7rem);
   font-weight: 900;
   letter-spacing: -0.5px;
-  line-height: 1.2;
+  line-height: 1.25;
+  white-space: nowrap; /* Single line on desktop */
+}
+@media (max-width: 768px) {
+  .thought-title {
+    white-space: normal; /* Mobile par natural wrapping */
+  }
 }
 
 /* --- Section Layouts --- */
@@ -563,7 +569,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   FOUNDERS SECTION (THEMED BLEND - NO WHITE COLOR CHANGE)
+   FOUNDERS SECTION (THEMED BLEND & BALANCED FRAMING)
    ======================================================== */
 .founders-grid {
   display: grid;
@@ -571,7 +577,7 @@ nav a:hover {
   gap: clamp(24px, 3vw, 36px);
 }
 .founder-card {
-  background: #ffffcc !important; /* Stays blended with page background */
+  background: #ffffcc !important;
   border: 1.5px solid rgba(17, 17, 17, 0.12);
   border-radius: 28px;
   overflow: hidden;
@@ -585,7 +591,6 @@ nav a:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
   border-color: rgba(255, 32, 32, 0.35);
-  background: #ffffcc !important; /* Never turns white */
 }
 .founder-img-box {
   width: 100%;
@@ -598,7 +603,7 @@ nav a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 25%; /* Optimal head-to-shoulder framing */
   transition: transform 0.5s ease;
 }
 .founder-card:hover .founder-img {
@@ -636,7 +641,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   PROVEN TRACK RECORD SECTION (FULLY RESPONSIVE)
+   PROVEN TRACK RECORD SECTION (OVERFLOW FIXED)
    ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
@@ -647,7 +652,7 @@ nav a:hover {
   background-color: #111111;
   color: #ffffff;
   border-radius: clamp(24px, 3vw, 40px);
-  padding: clamp(36px, 5vw, 65px) clamp(24px, 4vw, 60px);
+  padding: clamp(36px, 5vw, 65px) clamp(20px, 4vw, 60px);
   width: 100%;
 }
 .metrics .section-title-wix {
@@ -674,12 +679,13 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 24px 18px;
+  padding: 24px 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   min-width: 0;
+  overflow: hidden; /* Text box ke bahar na nikle */
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
 }
 .metric-box-card:hover,
@@ -690,14 +696,15 @@ nav a:hover {
 }
 .metric-box-card h3 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+  font-size: clamp(1.5rem, 2.3vw, 2.8rem);
   font-weight: 900;
   color: #FF2020;
   margin-bottom: 6px;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.5px;
   white-space: nowrap;
   transition: transform 0.25s ease;
+  width: 100%;
 }
 .metric-box-card:hover h3,
 .metric-box-card.is-scroll-active h3 {
@@ -707,7 +714,7 @@ nav a:hover {
   font-size: clamp(10px, 0.85vw, 12px);
   color: #cccccc;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -833,7 +840,7 @@ nav a:hover {
   transform: translateY(0);
 }
 
-/* --- Responsive Breakpoints (Phone & Tablet Compact Sizes) --- */
+/* --- Responsive Breakpoints --- */
 @media (max-width: 980px) {
   .founders-grid {
     grid-template-columns: 1fr;
@@ -842,7 +849,7 @@ nav a:hover {
     gap: 24px;
   }
   .founder-img-box {
-    height: 320px;
+    height: 330px;
   }
   .metric-row-single {
     display: grid;
@@ -885,38 +892,44 @@ nav a:hover {
   }
 }
 
-/* Phone Specific Optimization: Compact & Well Balanced */
+/* Phone Specific Optimization (Compact, Fit & Framed) */
 @media (max-width: 520px) {
+  /* Caroline Daniel & Founders image properly framed on phones */
   .founder-img-box {
-    height: 250px; /* Reduced from 420px for phones */
+    height: 300px; /* Enhanced height for portrait view */
+  }
+  .founder-img {
+    object-position: center 20%; /* Shows natural head & shoulders */
   }
   .founder-body {
-    padding: 18px 16px 22px;
+    padding: 20px 18px 24px;
   }
   .founder-name {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
   }
   .founder-bio {
-    font-size: 13.5px;
-    line-height: 1.55;
+    font-size: 14px;
+    line-height: 1.6;
   }
   
-  /* Metrics Grid on Mobile: Clean 2x2 */
+  /* Metrics Grid on Mobile: 2x2 Clean Layout */
   .metric-row-single {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
   .metric-box-card {
-    padding: 16px 12px;
-    border-radius: 14px;
+    padding: 16px 10px;
+    border-radius: 16px;
   }
+  /* 32-48% font scaled down safely so '%' never clips */
   .metric-box-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    letter-spacing: -0.3px;
     margin-bottom: 2px;
   }
   .metric-box-card p {
-    font-size: 9px;
-    letter-spacing: 0.5px;
+    font-size: 8.5px;
+    letter-spacing: 0.4px;
   }
   
   .wix-capsule-title {
@@ -982,7 +995,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- Brand Thought Banner -->
+  <!-- Brand Thought Banner (Single-Line on Desktop) -->
   <div class="brand-thought-banner reveal-item">
     <div class="thought-card">
       <div class="thought-subtitle">Our Brand Thought</div>
@@ -1083,7 +1096,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- ABOUT THE FOUNDERS (BLEND & NATURAL THEME) -->
+  <!-- ABOUT THE FOUNDERS -->
   <section class="section-wrapper" id="founders">
     <div class="reveal-item">
       <h2 class="section-title-wix title-pulse-once">About the Founders</h2>
@@ -1135,7 +1148,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- WIDE METRICS SECTION (PROVEN TRACK RECORD) -->
+  <!-- PROVEN TRACK RECORD METRICS SECTION (PHONE 2x2 FIX) -->
   <div class="metrics-wrapper-wide">
     <section class="metrics reveal-item" id="track-record">
       <h2 class="section-title-wix">Proven Track Record</h2>
