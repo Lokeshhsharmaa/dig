@@ -2,13 +2,14 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<!-- Phone Zoom Lock: Prevents layout disruption on mobile touch -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Handles | Creative Film & Visual Storytelling</title>
 
 <!-- Fonts matching template -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -20,6 +21,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  touch-action: pan-x pan-y; /* Locks pinch-zoom while keeping normal scroll smooth */
 }
 body {
   background-color: #ffffcc;
@@ -28,6 +30,7 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   top: 0px !important;
+  touch-action: pan-x pan-y;
 }
 
 /* ========================================================
@@ -151,7 +154,7 @@ body {
   margin: 0 !important;
 }
 
-/* --- Header & Brand Logo --- */
+/* --- Header & Clean Desktop Menu Font --- */
 header {
   position: sticky;
   top: 0;
@@ -192,20 +195,22 @@ nav {
   display: flex;
   align-items: center;
 }
+/* Replaced dense Syne with clear, legible Plus Jakarta Sans */
 nav a {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   color: #111111;
   text-decoration: none;
-  margin-left: clamp(16px, 2.5vw, 36px);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
+  margin-left: clamp(16px, 2.2vw, 32px);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
   transition: color 0.2s ease, transform 0.2s ease;
   display: inline-block;
+  white-space: nowrap;
 }
 nav a:hover {
   color: #FF2020;
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
 }
 .menu-btn {
   display: none;
@@ -224,7 +229,7 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 28px;
+  gap: 26px;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 40px 20px;
@@ -233,13 +238,13 @@ nav a:hover {
   transform: translateY(0);
 }
 .mobile-nav a {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(24px, 6vw, 34px);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 5.5vw, 30px);
   color: #111111;
   text-decoration: none;
   font-weight: 800;
   white-space: nowrap;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
   transition: color 0.2s ease;
 }
 .mobile-nav a:hover {
@@ -341,7 +346,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* --- Brand Thought Banner (Clean 2-Lines Exactly as Requested) --- */
+/* --- Brand Thought Banner (2 Lines) --- */
 .brand-thought-banner {
   max-width: 1400px;
   margin: 0 auto clamp(40px, 6vw, 70px);
@@ -453,6 +458,16 @@ nav a:hover {
   margin-bottom: 24px;
 }
 
+/* Clean Readable Style for What We Offer Sub-heading */
+.offer-subheading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+  color: #111111;
+}
+
 /* Service Grid (What We Do items) */
 .services-grid {
   display: grid;
@@ -479,7 +494,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   OUR KEY DIFFERENCE
+   WHY HANDLES (PREVIOUSLY OUR DIFFERENCE)
    ======================================================== */
 .wix-card-stack {
   display: flex;
@@ -566,7 +581,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   FOUNDERS SECTION (ORIGINAL RESTORED FOR ANIMESH & HARI)
+   FOUNDERS SECTION
    ======================================================== */
 .founders-grid {
   display: grid;
@@ -597,16 +612,16 @@ nav a:hover {
   position: relative;
 }
 
-/* Default / Original for Hari and Animesh */
+/* Original Framing for Hari & Animesh */
 .founder-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center; /* Original exact position untouched */
+  object-position: top center;
   transition: transform 0.5s ease;
 }
 
-/* Specific framing ONLY applied to Caroline Daniel */
+/* Specific framing applied ONLY to Caroline */
 .founder-img.caroline-img {
   object-position: center 20%;
 }
@@ -646,7 +661,7 @@ nav a:hover {
 }
 
 /* ========================================================
-   PROVEN TRACK RECORD SECTION
+   PROVEN TRACK RECORD SECTION (RESTORED)
    ======================================================== */
 .metrics-wrapper-wide {
   max-width: 1440px;
@@ -962,12 +977,13 @@ nav a:hover {
     <span class="logo-text">Handles</span>
   </a>
 
+  <!-- Renamed Menu Items with Clean, Legible Font -->
   <nav>
-    <a href="#about">About</a>
+    <a href="#about">About Us</a>
     <a href="#what-we-do">What We Do</a>
-    <a href="#key-difference">Our Difference</a>
+    <a href="#why-handles">Why Handles</a>
     <a href="#founders">Founders</a>
-    <a href="#track-record">Results</a>
+    <a href="#track-record">Track Record</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="menu-btn" onclick="document.querySelector('.mobile-nav').classList.add('active')">☰</div>
@@ -975,11 +991,11 @@ nav a:hover {
 
 <div class="mobile-nav">
   <div class="close-btn" onclick="document.querySelector('.mobile-nav').classList.remove('active')">×</div>
-  <a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('active')">About</a>
+  <a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('active')">About Us</a>
   <a href="#what-we-do" onclick="document.querySelector('.mobile-nav').classList.remove('active')">What We Do</a>
-  <a href="#key-difference" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Our Difference</a>
+  <a href="#why-handles" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Why Handles</a>
   <a href="#founders" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Founders</a>
-  <a href="#track-record" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Results</a>
+  <a href="#track-record" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Track Record</a>
   <a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('active')">Contact</a>
 </div>
 
@@ -1010,7 +1026,7 @@ nav a:hover {
   <section class="section-wrapper" id="about">
     <div class="wix-split-section">
       <div class="wix-split-left reveal-item">
-        <h2 class="section-title-wix title-pulse-once">About Handles</h2>
+        <h2 class="section-title-wix title-pulse-once">About Us</h2>
         <div class="wix-decorative-dots">
           <span></span><span></span><span></span><span></span>
         </div>
@@ -1053,7 +1069,8 @@ nav a:hover {
         </div>
 
         <div style="margin-top: 35px; border-top: 1px solid rgba(0,0,0,0.12); padding-top: 25px;">
-          <h4 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 10px;">What We Offer: End-to-End Execution</h4>
+          <!-- Clean Font for What We Offer Heading -->
+          <h4 class="offer-subheading">What We Offer: End-to-End Execution</h4>
           <p class="about-desc-text" style="margin-bottom: 0;">
             Idea → Script → Pre-Production → Shoot → Direction → Cinematography → Editing → Graphics → Final Delivery. Depending on your requirement, we handle the entire project from concept to final cut.
           </p>
@@ -1062,10 +1079,10 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- OUR KEY DIFFERENCE -->
-  <section class="section-wrapper" id="key-difference">
+  <!-- WHY HANDLES (RENAMED FROM OUR DIFFERENCE) -->
+  <section class="section-wrapper" id="why-handles">
     <div class="reveal-item">
-      <h2 class="section-title-wix title-pulse-once">Our Key Difference</h2>
+      <h2 class="section-title-wix title-pulse-once">Why Handles</h2>
       <p class="section-subtitle-wix">We don't just shoot videos. We approach every project like filmmakers.</p>
     </div>
     <div class="wix-card-stack">
@@ -1121,7 +1138,7 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 2: Animesh Sen (Original Setting Untouched) -->
+      <!-- Founder 2: Animesh Sen (Untouched & Clean) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
@@ -1135,7 +1152,7 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 3: Caroline Daniel (Custom Balanced Framing Only For Her) -->
+      <!-- Founder 3: Caroline Daniel -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/caroline.jpg" alt="Caroline Daniel - Co-Founder" class="founder-img caroline-img">
@@ -1151,10 +1168,10 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- WIDE METRICS SECTION (PROVEN TRACK RECORD) -->
+  <!-- TRACK RECORD (PREVIOUSLY RESULTS) -->
   <div class="metrics-wrapper-wide">
     <section class="metrics reveal-item" id="track-record">
-      <h2 class="section-title-wix">Proven Track Record</h2>
+      <h2 class="section-title-wix">Track Record</h2>
       <p class="metrics-subtitle">Verified metrics generated across Instagram, YouTube, and multi-channel campaigns.</p>
       
       <div class="metric-row-single">
