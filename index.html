@@ -613,27 +613,28 @@ nav a:hover {
   position: relative;
 }
 
-/* Default / Untouched (Animesh Sen) */
+/* Base Image Setting */
 .founder-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   display: block;
   transition: transform 0.5s ease;
 }
 
-/* M.S. Hari Desktop & Mobile Natural Ratio Fix */
+/* 1. M.S. Hari: Landscape 16:9 Image Adaptive Framing */
 .founder-img.hari-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: 32% center !important; /* Perfect natural focus on face without squishing */
+  object-position: 32% center !important;
 }
 
-/* Specific framing for Caroline Daniel */
+/* 2. Animesh Sen: Full-Length Portrait Adaptive Framing */
+.founder-img.animesh-img {
+  object-position: center 8% !important;
+}
+
+/* 3. Caroline Daniel: 1:1 Square Portrait Adaptive Framing */
 .founder-img.caroline-img {
-  object-position: center 20%;
+  object-position: center 20% !important;
 }
 
 .founder-card:hover .founder-img {
@@ -1011,7 +1012,7 @@ nav a:hover {
 </div>
 
 <main>
-  <!-- Hero Section (Updated to CREATIVE VIDEO PRODUCTION AGENCY) -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-tagline reveal-item">Creative Film • Visual Storytelling • Cinematic Production</div>
     <h1 class="hero-title reveal-item">Creative Video Production Agency</h1>
@@ -1134,7 +1135,7 @@ nav a:hover {
     </div>
 
     <div class="founders-grid">
-      <!-- Founder 1: M.S. Hari (Unsqueezed & Aspect-Ratio Fixed on Desktop) -->
+      <!-- Founder 1: M.S. Hari -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/hari.jpg" alt="M.S. Hari - Founder & Director" class="founder-img hari-img">
@@ -1148,10 +1149,10 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 2: Animesh Sen (Untouched & Clean) -->
+      <!-- Founder 2: Animesh Sen (With Adaptive animesh-img Class) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
-          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img">
+          <img src="images/animesh.jpg" alt="Animesh Sen - Co-Founder" class="founder-img animesh-img">
         </div>
         <div class="founder-body">
           <h3 class="founder-name">Animesh Sen</h3>
@@ -1162,7 +1163,7 @@ nav a:hover {
         </div>
       </div>
 
-      <!-- Founder 3: Caroline Daniel -->
+      <!-- Founder 3: Caroline Daniel (With Adaptive caroline-img Class) -->
       <div class="founder-card reveal-item">
         <div class="founder-img-box">
           <img src="images/caroline.jpg" alt="Caroline Daniel - Co-Founder" class="founder-img caroline-img">
@@ -1178,7 +1179,7 @@ nav a:hover {
     </div>
   </section>
 
-  <!-- TRACK RECORD (PREVIOUSLY RESULTS) -->
+  <!-- TRACK RECORD -->
   <div class="metrics-wrapper-wide">
     <section class="metrics reveal-item" id="track-record">
       <h2 class="section-title-wix">Track Record</h2>
